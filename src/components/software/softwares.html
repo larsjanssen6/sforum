@@ -1,0 +1,55 @@
+﻿<template>
+  <style>
+    .bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #002e5b;
+      color: #FFFFFF;
+      height: 100px;
+      margin-bottom: 20px;
+      font-weight: 300;
+      font-size: 50px;
+      text-transform: uppercase;
+    }
+
+    }
+
+    navbar {
+      margin: 0px !important;
+    }
+  </style>
+
+  <div class="bar">
+    <h1>Software</h1>
+  </div>
+
+  <div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-5">
+            Naam
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr repeat.for="software of softwares">
+          <td class="col-md-4">
+            ${software.name}
+          </td>
+
+          <td></td>
+
+          <td>
+            <i class="material-icons" click.trigger="destroy(forum)">&#xE872;</i>
+
+            <a href="#">
+              <i class="material-icons">&#xE254;</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

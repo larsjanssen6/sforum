@@ -1,0 +1,57 @@
+﻿<template>
+  <require from='../shared/sideBar'></require>
+
+  <div class="bar" >
+    <h1>Forum</h1>
+  </div>
+
+ <div class="container-custom">
+    <div class="row">
+      <side-bar>
+          <div slot="buttons">
+              <a route-href="route: newForum" class="btn btn-primary btn-block margin__bottom__small">Maak Forum</a>
+          </div>
+      </side-bar>
+
+      <div class="col-md-10">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-5 table__title">
+                    Naam
+                  </th>
+
+                  <th class="col-md-3 table__title">
+                    Omschrijving
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="forum of forums">
+                  <td class="col-md-4">
+                    ${forum.name}
+                  </td>
+
+                  <td class="col-md-3">
+                    ${forum.description}
+                  </td>
+
+                  <td>
+                    <i class="material-icons" click.delegate="destroy(forum)">&#xE872;</i>
+
+                    <a route-href="route: editForum; params.bind: { id:forum.id }">
+                      <i class="material-icons">&#xE254;</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+</template>

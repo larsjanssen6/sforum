@@ -1,0 +1,65 @@
+﻿<template>
+  <require from='../shared/sideBar'></require>
+
+  <div class="bar">
+    <h1>Corporaties</h1>
+  </div>
+
+  <div class="container-custom">
+    <div class="row">
+      <side-bar>
+        <div slot="buttons">
+          <a route-href="route: newCorporation" class="btn btn-primary btn-block margin__bottom__small">Maak Corporatie</a>
+        </div>
+      </side-bar>
+
+      <div class="col-md-10">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-3 table__title">
+                    Naam
+                  </th>
+
+                  <th class="col-md-3 table__title">
+                    Adres
+                  </th>
+
+                  <th class="col-md-3 table__title">
+                    Postcode
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="corporation of corporations">
+                  <td class="col-md-3">
+                    ${corporation.name}
+                  </td>
+
+                  <td class="col-md-3">
+                    ${corporation.address}
+                  </td>
+
+                  <td class="col-md-3">
+                    ${corporation.zip}
+                  </td>
+
+                  <td>
+                    <i class="material-icons" click.delegate="destroy(corporation)">&#xE872;</i>
+
+                    <a>
+                      <i class="material-icons">&#xE254;</i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

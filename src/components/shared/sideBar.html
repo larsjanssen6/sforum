@@ -1,0 +1,36 @@
+﻿<template>
+  <div class="col-md-2 col-lg-2">
+    <slot name="buttons"></slot>
+
+    <ul class="list-group sidebar">
+      <li class="list-group-item menu">
+        <h4>Menu</h4>
+      </li>
+
+      <a href="#">
+        <li class="list-group-item">
+          <h4>Nieuwe berichten</h4>
+        </li>
+      </a>
+
+      <a href="#">
+        <li class="list-group-item">
+          <h4>Mijn berichten</h4>
+        </li>
+      </a>
+
+      <li class="list-group-item">
+        <input id="searchInput"
+               onkeydown="if (event.keyCode == 13) document.getElementById('search').click()"
+               class="form-control"
+               placeholder="Zoeken">
+
+        <button id="search" onclick="search()" class="btn btn-primary btn-block margin__top__small">
+            Zoeken
+        </button>
+      </li>
+    </ul>
+  </div>
+
+
+</template>

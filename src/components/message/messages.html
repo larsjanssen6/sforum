@@ -1,0 +1,57 @@
+﻿<template>
+  <require from='../shared/sideBar'></require>
+
+  <div class="bar">
+    <h1>Berichten</h1>
+  </div>
+
+  <div class="container-custom">
+    <div class="row">
+      <side-bar>
+        <div slot="buttons">
+          <a route-href="route: newMessage" class="btn btn-primary btn-block margin__bottom__small">Nieuw bericht</a>
+        </div>
+      </side-bar>
+
+      <div class="col-md-10">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-5 table__title">
+                    Onderwerp
+                  </th>
+
+                  <th class="col-md-3 table__title">
+                    Door
+                  </th>
+
+                  <th class="col-md-3 table__title">
+                    Software
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="message of messages">
+                  <td class="col-md-4">
+                    ${message.subject}
+                  </td>
+
+                  <td class="col-md-3">
+                    ${message.user}
+                  </td>
+
+                  <td class="col-md-3">
+                    ${message.software}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

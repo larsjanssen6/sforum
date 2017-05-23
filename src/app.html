@@ -1,0 +1,72 @@
+<template bindable="router">
+  <require from="sweetalert/dist/sweetalert.css"></require>
+  <div id="app">
+    <div class="strip strip__top"></div>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+
+          <!-- Collapsed Hamburger -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand hidden-xs" href="/">
+            ${title}
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+          <!-- Right Side Of Navbar -->
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a route-href="route: dashboard" class="${currUrl == 'dashboard' ? 'active' : ''}" show.bind="authenticated">
+                Dashboard
+              </a>
+            </li>
+
+            <li>
+              <a route-href="route: corporations" class="${currUrl == 'corporations' ? 'active' : ''}" show.bind="authenticated">
+                Corporaties
+              </a>
+            </li>
+
+            <li>
+              <a route-href="route: users" class="${currUrl == 'users' ? 'active' : ''}" show.bind="authenticated">
+                Gebruikers
+              </a>
+            </li>
+
+            <li>
+              <a route-href="route: softwares" class="${currUrl == 'softwares' ? 'active' : ''}" show.bind="authenticated">
+                Software
+              </a>
+            </li>
+
+            <li>
+              <a href="#" click.delegate="logout()" show.bind="authenticated">
+                Uitloggen
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="${currUrl == 'register' ? 'active' : ''}" show.bind="!authenticated">
+                Registreer
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <router-view></router-view>
+  </div>
+
+  <div id="footer">
+    <p>SFORUM 2017</p>
+  </div>
+  <div class="strip strip__footer"></div>
+</template>

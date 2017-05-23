@@ -1,0 +1,9 @@
+\\Mac\Home\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Proftaak.deps.json
+\\Mac\Home\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Proftaak.runtimeconfig.json
+\\Mac\Home\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Proftaak.runtimeconfig.dev.json
+\\Mac\Home\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Proftaak.dll
+\\Mac\Home\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Proftaak.pdb
+\\Mac\Home\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Proftaak.csprojResolveAssemblyReference.cache
+\\Mac\Home\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Proftaak.AssemblyInfo.cs
+\\Mac\Home\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Proftaak.dll
+\\Mac\Home\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Proftaak.pdb

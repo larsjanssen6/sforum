@@ -1,0 +1,45 @@
+﻿<template>
+  <div class="bar">
+    <h1>Bewerk forum</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span>bewerk forum</span>
+          </div>
+
+          <div class="panel-body">
+            <form class="form-horizontal" role="form" method="POST" submit.delegate="update()">
+
+              <div class="form-group">
+                <label for="name" class="col-md-4 control-label">Naam</label>
+
+                <div class="col-md-6">
+                  <input value.bind="forum.name" id="name" type="text" class="form-control" name="name" required autofocus>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="description" class="col-md-4 control-label">Beschrijving</label>
+
+                <div class="col-md-6">
+                  <input value.bind="forum.description" id="description" type="description" class="form-control" name="description">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                  <button id="submit" type="submit" class="btn btn-primary">
+                    Update forum
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
