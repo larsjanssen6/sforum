@@ -30,7 +30,7 @@
               </thead>
 
               <tbody>
-                <tr repeat.for="forum of forums">
+                <tr repeat.for="forum of forums" click.delegate="link(forum)">
                   <td class="col-md-4">
                     ${forum.name}
                   </td>

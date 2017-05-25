@@ -9,7 +9,7 @@
     <div class="row">
       <side-bar>
         <div slot="buttons">
-          <a route-href="route: newMessage" class="btn btn-primary btn-block margin__bottom__small">Nieuw bericht</a>
+          <a route-href="route: newMessage; params.bind: { id: forumId }" class="btn btn-primary btn-block margin__bottom__small">Nieuw bericht</a>
         </div>
       </side-bar>
 
@@ -34,7 +34,7 @@
               </thead>
 
               <tbody>
-                <tr repeat.for="message of messages">
+                <tr repeat.for="message of messages" click.delegate="link(message)">
                   <td class="col-md-4">
                     ${message.subject}
                   </td>

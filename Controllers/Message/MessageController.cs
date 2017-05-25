@@ -26,5 +26,29 @@ namespace Killerapp.Controllers.Message
         {
             return Json(messageRepo.index(forumId));
         }
-    }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult store([FromBody] MessageModel message)
+        {
+            int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
+            messageRepo.store(message, authId);
+            return StatusCode(200);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult show([FromBody] int id)
+        {
+            return Json(messageRepo.find(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult update([FromBody] MessageModel message)
+        {
+            messageRepo.update(message);
+            return StatusCode(200);
+        }
+  }
 }

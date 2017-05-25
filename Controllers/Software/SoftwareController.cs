@@ -22,9 +22,9 @@ namespace Killerapp.Controllers.Software
 
         [HttpPost]
         [Authorize(Roles = "user")]
-        public JsonResult index([FromBody] int corporation_id)
+        public JsonResult index([FromBody] int corporationId)
         {
-            return Json(softwareRepo.index(corporation_id));
+            return Json(softwareRepo.index(corporationId));
         }
     }
 }

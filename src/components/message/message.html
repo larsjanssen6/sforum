@@ -1,0 +1,67 @@
+﻿<template>
+  <div class="container-custom">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-11">
+                <u>
+                  <a href="#" style="color:white;">
+                    Lars Janssen
+                  </a>
+                </u>
+
+                <span>-</span>
+
+                <u>
+                  <a href="#" style="color:white;">
+                    Corporatie
+                  </a>
+                </u>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="row" style="border-bottom: 1px solid black;">
+              <div class="col-md-12 margin__bottom__small">
+                <input id="subject" if.bind="editing" type="text" class="form-control" name="subject" value.bind="message.subject" required autofocus>
+                <h3 if.bind="!editing">${message.subject}</h3>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 margin__top__small">
+                <div if.bind="editing">
+                  <textarea class="form-control margin__bottom__small" value.bind="message.message" name="message"></textarea>
+
+                  <button class="btn btn-xs btn-second" click.delegate="update()">Update</button>
+                  <button class="btn btn-xs btn-link" click.delegate="editing = false">Annuleer</button>
+                </div>
+
+                <div if.bind="!editing">
+                  <p>${message.message}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary slideDown" click.delegate="destroy">
+                  Verwijder
+                </button>
+
+                <button class="btn btn-second slideDown" if.bind="!editing" click.delegate="editing = true">
+                  Bewerk
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

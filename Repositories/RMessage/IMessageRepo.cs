@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Killerapp.Repositories.RMessage
 {
     interface IMessageRepo
     {
         List<MessageModel> index(int forumId);
+        void store(MessageModel message, int accountId);
+        MessageModel find(int id);
+        void update(MessageModel message);
     }
 }

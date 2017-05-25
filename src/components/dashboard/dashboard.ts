@@ -1,12 +1,13 @@
 ﻿import { HttpClient, json } from "aurelia-fetch-client"
 import { autoinject } from "aurelia-framework"
+import { Router } from 'aurelia-router'
 
 @autoinject
 export class dashboard {
 
     public forums: ForumModel[] = [];
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.fetchForums();
     }
 
@@ -43,6 +44,10 @@ export class dashboard {
                 });
             }
         });
+    }
+
+    link(forum) {
+        this.router.navigate("berichten/" + forum.id);
     }
 
     isEmpty(forums) {

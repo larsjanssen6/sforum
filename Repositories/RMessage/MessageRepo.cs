@@ -24,8 +24,7 @@ namespace Killerapp.Repositories.RMessage
               try
                 {
                   connection.Connect();
-                  SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as user, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id" +
-                  "inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.forum_id = @forumId", connection.getConnection());
+                  SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.forum_id = @forumId", connection.getConnection());
                   sqlCommand.Parameters.AddWithValue("@forumId", forumId);
                   SqlDataReader reader = sqlCommand.ExecuteReader();
 
@@ -36,7 +35,7 @@ namespace Killerapp.Repositories.RMessage
                           message = new MessageModel();
                           message.id = Convert.ToInt32(reader["id"]);
                           message.forum = reader["forum"].ToString();
-                          message.user = reader["user"].ToString();
+                          message.user = reader["name"].ToString();
                           message.software = reader["software"].ToString();
                           message.subject = reader["subject"].ToString();
                           message.message = reader["message"].ToString();
@@ -56,6 +55,89 @@ namespace Killerapp.Repositories.RMessage
               }
 
               return messages;
+        }
+
+        public MessageModel find(int id)
+        {
+            MessageModel message = new MessageModel();
+
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        message.id = Convert.ToInt32(reader["id"]);
+                        message.forum = reader["forum"].ToString();
+                        message.user = reader["name"].ToString();
+                        message.software = reader["software"].ToString();
+                        message.subject = reader["subject"].ToString();
+                        message.message = reader["message"].ToString();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return message;
+        }
+
+        public void store(MessageModel message, int authId)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message)", connection.getConnection());
+                connection.Connect();
+
+                sqlCommand.Parameters.AddWithValue("@forum_id", 1);
+                sqlCommand.Parameters.AddWithValue("@account_id", authId);
+                sqlCommand.Parameters.AddWithValue("@software_id", message.software);
+                sqlCommand.Parameters.AddWithValue("@subject", message.subject);
+                sqlCommand.Parameters.AddWithValue("@message", message.message);
+                sqlCommand.Connection = connection.getConnection();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
+        public void update(MessageModel message)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("update message set subject = @subject, message = @message where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@subject", message.subject);
+                sqlCommand.Parameters.AddWithValue("@message", message.message);
+                sqlCommand.Parameters.AddWithValue("@id", message.id);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
         }
     }
 }

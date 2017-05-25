@@ -34,24 +34,40 @@ export class App {
         config.title = 'Aurelia';
         config.map([
             {
+                route: ['bericht/:id'],
+                name: 'message',
+                moduleId: 'components/message/message',
+                auth: true
+            },
+            {
+                route: ['berichten/:id/nieuw'],
+                name: 'newMessage',
+                moduleId: 'components/message/newMessage',
+                auth: true
+            },
+            {
                 route: ['berichten/:id'],
                 name: 'messages',
-                moduleId: 'components/message/messages'
+                moduleId: 'components/message/messages',
+                auth: true
             },
             {
                 route: ['corporatie/nieuw'],
                 name: 'newCorporation',
-                moduleId: 'components/corporation/newCorporation'
+                moduleId: 'components/corporation/newCorporation',
+                auth: true
             },
             {
                 route: ['forum/bewerk/:id'],
                 name: 'editForum',
-                moduleId: 'components/dashboard/editForum'
+                moduleId: 'components/dashboard/editForum',
+                auth: true
             },
             {
                 route: ['forum/nieuw',],
                 name: 'newForum',
-                moduleId: 'components/dashboard/newForum'
+                moduleId: 'components/dashboard/newForum',
+                auth: true
             },
             {
                 route: ['dashboard'],

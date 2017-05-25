@@ -41,12 +41,12 @@ namespace Killerapp.Repositories.Software
 
               catch (Exception)
               {
-                throw;
+                  throw;
               }
 
               finally
               {
-                connection.disConnect();
+                  connection.disConnect();
               }
 
               return softwares;
