@@ -22,6 +22,7 @@ export class message {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 this.message = data;
             });
     }
@@ -44,7 +45,7 @@ export class message {
             });
     }
 
-    destroy(message) {
+    destroy() {
         swal({
             title: 'Weet u het zeker?',
             type: 'warning',
@@ -55,7 +56,7 @@ export class message {
         }, (isOk) => {
             if (isOk) {
                 this.http.fetch('message/destroy', {
-                    body: json(message)
+                    body: json(this.message)
                 }).then(data => {
                     swal({
                         title: 'Verwijderd',
@@ -66,7 +67,7 @@ export class message {
                     });
                 });
 
-                this.router.navigate("/");
+                this.router.navigate("/dashboard");
             }
         });
     }

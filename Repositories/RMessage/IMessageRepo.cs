@@ -9,5 +9,6 @@ namespace Killerapp.Repositories.RMessage
         void store(MessageModel message, int accountId);
         MessageModel find(int id);
         void update(MessageModel message);
+        void destroy(int id);
     }
 }

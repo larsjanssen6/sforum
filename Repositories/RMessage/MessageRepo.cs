@@ -139,5 +139,27 @@ namespace Killerapp.Repositories.RMessage
                 connection.disConnect();
             }
         }
-    }
+
+        public void destroy(int id)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("delete message where id=@id;", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.ExecuteNonQuery();
+                connection.disConnect();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+  }
 }

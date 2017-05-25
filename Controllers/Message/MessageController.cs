@@ -50,5 +50,13 @@ namespace Killerapp.Controllers.Message
             messageRepo.update(message);
             return StatusCode(200);
         }
-  }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult destroy([FromBody] MessageModel message)
+        {
+          messageRepo.destroy(message.id);
+          return StatusCode(200);
+        }
+    }
 }
