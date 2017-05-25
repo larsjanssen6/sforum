@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Killerapp.Repositories.RReaction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,6 @@ namespace Killerapp.Repositories.RMessage
         public string software;
         public string subject;
         public string message;
+        public List<ReactionModel> reactions;
     }
 }

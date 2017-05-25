@@ -7,6 +7,7 @@ using Killerapp.Repositories.RForum;
 using Proftaak;
 using Microsoft.AspNetCore.Authorization;
 using Killerapp.Repositories.RMessage;
+using Killerapp.Repositories.RReaction;
 
 namespace Killerapp.Controllers.Message
 {
@@ -17,7 +18,7 @@ namespace Killerapp.Controllers.Message
 
         public MessageController()
         {
-            messageRepo = new MessageRepo(new Connection());
+            messageRepo = new MessageRepo(new Connection(), new ReactionRepo(new Connection()));
         }
 
         [HttpPost]

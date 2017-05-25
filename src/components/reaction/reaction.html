@@ -1,3 +1,53 @@
 ﻿<template>
-  <p>reaction</p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-12">
+          <u>
+            <a href="#">
+              Lars Janssen
+            </a>
+          </u>    
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 margin__top__small">
+          <div if.bind="editing">
+            <form enctype="multipart/form-data" method="post" @submit.prevent="update()">
+              <textarea class="form-control margin__bottom__small" value.bind="reaction.reaction" name="reaction"></textarea>
+
+              <button type="submit" class="btn btn-xs btn-second">
+                Update
+              </button>
+
+              <button class="btn btn-xs btn-link" click.delegate="editing = false">
+                Annuleer
+              </button>
+            </form>
+          </div>
+
+          <div if.bind="!editing">
+              <p>${reaction.reaction}</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary slideDown" submit.delegate="destroy()">
+            Verwijder
+          </button>
+
+          <button class="btn btn-second slideDown" if.bind="!editing" click.delegate="editing = true">
+            Bewerk
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>

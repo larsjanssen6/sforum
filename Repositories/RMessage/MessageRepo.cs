@@ -1,4 +1,5 @@
-﻿using Proftaak;
+﻿using Killerapp.Repositories.RReaction;
+using Proftaak;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,10 +11,12 @@ namespace Killerapp.Repositories.RMessage
     public class MessageRepo :IMessageRepo
     {
         ConnectionInterface connection;
+        IReactionRepo reactionRepo;
 
-        public MessageRepo(ConnectionInterface connection)
+        public MessageRepo(ConnectionInterface connection, IReactionRepo reactionRepo)
         {
           this.connection = connection;
+          this.reactionRepo = reactionRepo;
         }
 
         public List<MessageModel> index(int forumId)
@@ -80,6 +83,9 @@ namespace Killerapp.Repositories.RMessage
                         message.message = reader["message"].ToString();
                     }
                 }
+
+                message.reactions = new List<ReactionModel>();
+                message.reactions = reactionRepo.index(message.id);
             }
 
             catch (Exception ex)

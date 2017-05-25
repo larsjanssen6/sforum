@@ -1,4 +1,6 @@
 ﻿<template>
+  <require from="../reaction/reactions"></require>
+
   <div class="container-custom">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
@@ -61,6 +63,7 @@
             </div>
           </div>
         </div>
+        <reactions reactions.bind="message.reactions"></reactions>
       </div>
     </div>
   </div>

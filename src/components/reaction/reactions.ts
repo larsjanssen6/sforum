@@ -2,5 +2,4 @@
 
 export class reactions {
     @bindable reactions;
-
 }
