@@ -1,5 +1,6 @@
 ﻿import { HttpClient, json } from "aurelia-fetch-client"
 import { autoinject } from "aurelia-framework"
+import { Router } from 'aurelia-router'
 
 @autoinject
 export class corporations {
@@ -7,7 +8,7 @@ export class corporations {
     corporations = [];
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.fetchCorporations();
     }
 
@@ -19,7 +20,8 @@ export class corporations {
             });
     }
 
-    destroy(forum) {
+    destroy(event, forum) {
+        event.stopPropagation();
         swal({
             title: 'Weet u het zeker?',
             type: 'warning',
@@ -44,5 +46,10 @@ export class corporations {
                 });
             }
         });
+    }
+
+    editUrl(event, corporation) {
+        event.stopPropagation();
+        this.router.navigate("corporatie/bewerk/" + corporation.id);
     }
 }

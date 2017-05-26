@@ -11,5 +11,6 @@ namespace Killerapp.Repositories.RReaction
         public string name { get; set; }
         public string lastName { get; set; }
         public string reaction { get; set; }
+        public int message_id { get; set; }
     }
 }

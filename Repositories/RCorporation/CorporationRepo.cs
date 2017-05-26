@@ -54,6 +54,91 @@ namespace Killerapp.Repositories.RCorporation
             return corporations;
         }
 
+        public CorporationModel find(int id)
+        {
+            CorporationModel corporation = new CorporationModel();
+
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("select id, email, name, address, zip from corporation where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        corporation.id = Convert.ToInt32(reader["id"]);
+                        corporation.email = reader["email"].ToString();
+                        corporation.name = reader["name"].ToString();
+                        corporation.address = reader["address"].ToString();
+                        corporation.zip = reader["zip"].ToString();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+              throw;
+            }
+
+            return corporation;
+        }
+
+        public void store(CorporationModel corporation)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("insert into corporation (email, name, address, zip) VALUES (@email, @name, @address, @zip)", connection.getConnection());
+                connection.Connect();
+
+                sqlCommand.Parameters.AddWithValue("@email", corporation.email);
+                sqlCommand.Parameters.AddWithValue("@name", corporation.name);
+                sqlCommand.Parameters.AddWithValue("@address", corporation.address);
+                sqlCommand.Parameters.AddWithValue("@zip", corporation.zip);
+                sqlCommand.Connection = connection.getConnection();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
+
+        public void update(CorporationModel corporation)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("update corporation set email = @email, name = @name, address = @address, zip = @zip where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@email", corporation.email);
+                sqlCommand.Parameters.AddWithValue("@name", corporation.name);
+                sqlCommand.Parameters.AddWithValue("@address", corporation.address);
+                sqlCommand.Parameters.AddWithValue("@zip", corporation.zip);
+                sqlCommand.Parameters.AddWithValue("@id", corporation.id);
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
         public void destroy(int id)
         {
             try

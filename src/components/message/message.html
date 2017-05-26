@@ -10,15 +10,7 @@
               <div class="col-md-11">
                 <u>
                   <a href="#" style="color:white;">
-                    Lars Janssen
-                  </a>
-                </u>
-
-                <span>-</span>
-
-                <u>
-                  <a href="#" style="color:white;">
-                    Corporatie
+                    ${reaction.user}
                   </a>
                 </u>
               </div>
@@ -64,6 +56,10 @@
           </div>
         </div>
         <reactions reactions.bind="message.reactions"></reactions>
+        <textarea class="form-control margin__bottom__small margin__top__small" value.bind="reaction.reaction" name="reaction"></textarea>
+        <button click.delegate="post()" class="btn btn-primary">
+          Post reactie
+        </button>
       </div>
     </div>
   </div>

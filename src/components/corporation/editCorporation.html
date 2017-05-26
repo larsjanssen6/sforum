@@ -1,6 +1,6 @@
 ﻿<template>
   <div class="bar">
-    <h1>Nieuwe Corporatie</h1>
+    <h1>Bewerk Corporatie</h1>
   </div>
 
   <div class="container">
@@ -8,11 +8,11 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <span>Nieuwe corporatie</span>
+            <span>Bewerk corporatie</span>
           </div>
 
           <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" submit.delegate="store()">
+            <form class="form-horizontal" role="form" method="POST" submit.delegate="update()">
 
               <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Naam</label>
@@ -49,7 +49,7 @@
               <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                   <button id="submit" type="submit" class="btn btn-primary">
-                    Maak corporatie
+                    Update corporatie
                   </button>
                 </div>
               </div>

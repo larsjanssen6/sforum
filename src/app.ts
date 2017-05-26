@@ -52,6 +52,12 @@ export class App {
                 auth: true
             },
             {
+                route: ['corporatie/bewerk/:id'],
+                name: 'editCorporation',
+                moduleId: 'components/corporation/editCorporation',
+                auth: true
+            },
+            {
                 route: ['corporatie/nieuw'],
                 name: 'newCorporation',
                 moduleId: 'components/corporation/newCorporation',

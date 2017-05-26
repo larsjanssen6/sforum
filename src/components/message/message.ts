@@ -5,8 +5,9 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class message {
 
-    message: {};
+    message: {  reactions: Reaction[], id: "" };
     editing: boolean;
+    reaction: Reaction;
 
     constructor(private http: HttpClient, private router: Router) {
         this.editing = false;
@@ -16,13 +17,17 @@ export class message {
         this.getMessage();
     }
 
+    async activate(params) {
+        //alert(params.id);
+        //this.reaction.message_id = params.id;
+    }
+
     getMessage() {
         this.http.fetch('message/show', {
             body: json(this.router.currentInstruction.params.id)
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 this.message = data;
             });
     }
@@ -71,4 +76,29 @@ export class message {
             }
         });
     }
+
+    post() {
+        this.message.reactions.push(this.reaction);
+
+        //this.http.fetch('reaction/store', {
+        //    body: json(this.reaction)
+        //}).then(response => {
+        //    if (response.status == 200) {
+        //        swal({
+        //            title: "Reactie succesvol aangemaakt",
+        //            type: "success",
+        //            showConfirmButton: false,
+        //            timer: 2000
+        //        });
+
+        //        this.reaction = {};
+        //    }
+        //});
+    }
+}
+
+export class Reaction {
+    message_id: number;
+    account_id: number;
+    reaction: string;
 }

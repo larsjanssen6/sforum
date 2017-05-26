@@ -19,7 +19,8 @@ export class dashboard {
             });
     }
 
-    destroy(forum) {
+    destroy($event, forum) {
+        event.stopPropagation();
         swal({
             title: 'Weet u het zeker?',
             type: 'warning',
@@ -47,7 +48,13 @@ export class dashboard {
     }
 
     link(forum) {
+        event.stopPropagation();
         this.router.navigate("berichten/" + forum.id);
+    }
+
+    editUrl(event, forum) {
+        event.stopPropagation();
+        this.router.navigate("forum/bewerk/" + forum.id);
     }
 
     isEmpty(forums) {

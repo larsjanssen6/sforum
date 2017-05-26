@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <u>
             <a href="#">
-              Lars Janssen
+              ${reaction.name} 
             </a>
           </u>    
         </div>
@@ -15,7 +15,7 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12 margin__top__small">
-          <div if.bind="editing">
+          <div class="margin__bottom__small" if.bind="editing">
             <form enctype="multipart/form-data" method="post" @submit.prevent="update()">
               <textarea class="form-control margin__bottom__small" value.bind="reaction.reaction" name="reaction"></textarea>
 
@@ -38,7 +38,7 @@
     <div class="panel-footer">
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-primary slideDown" submit.delegate="destroy()">
+          <button class="btn btn-primary slideDown" click.delegate="destroy()">
             Verwijder
           </button>
 

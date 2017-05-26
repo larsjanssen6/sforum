@@ -40,11 +40,8 @@
                   </td>
 
                   <td>
-                    <i class="material-icons" click.delegate="destroy(forum)">&#xE872;</i>
-
-                    <a route-href="route: editForum; params.bind: { id:forum.id }">
-                      <i class="material-icons">&#xE254;</i>
-                    </a>
+                    <i class="material-icons" click.delegate="destroy($event, forum)">&#xE872;</i>
+                    <i class="material-icons" click.delegate="editUrl($event, forum)">&#xE254;</i>                
                   </td>
                 </tr>
               </tbody>

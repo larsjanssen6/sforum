@@ -9,5 +9,8 @@ namespace Killerapp.Repositories.RCorporation
     {
         List<CorporationModel> index();
         void destroy(int id);
+        void store(CorporationModel corporation);
+        CorporationModel find(int id);
+        void update(CorporationModel corporation);
     }
 }

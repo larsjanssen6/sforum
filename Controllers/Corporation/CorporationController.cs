@@ -28,6 +28,29 @@ namespace Killerapp.Controllers.Corporation
 
         [HttpPost]
         [Authorize(Roles = "user")]
+        public IActionResult show([FromBody] int id)
+        {
+          return Json(corporationRepo.find(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult store([FromBody] CorporationModel corporation)
+        {
+            corporationRepo.store(corporation);
+            return StatusCode(200);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult update([FromBody] CorporationModel corporation)
+        {
+            corporationRepo.update(corporation);
+            return StatusCode(200);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] CorporationModel corporation)
         {
             corporationRepo.destroy(corporation.id);
