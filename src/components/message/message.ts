@@ -7,7 +7,7 @@ export class message {
 
     message: {  reactions: Reaction[], id: "" };
     editing: boolean;
-    reaction: Reaction;
+    reaction = new Reaction;
 
     constructor(private http: HttpClient, private router: Router) {
         this.editing = false;
@@ -18,8 +18,7 @@ export class message {
     }
 
     async activate(params) {
-        //alert(params.id);
-        //this.reaction.message_id = params.id;
+        this.reaction.message_id = params.id;
     }
 
     getMessage() {
@@ -78,22 +77,20 @@ export class message {
     }
 
     post() {
-        this.message.reactions.push(this.reaction);
+        this.http.fetch('reaction/store', {
+            body: json(this.reaction)
+        }).then(response => response.json())
+            .then(data => {
+                swal({
+                    title: "Reactie succesvol aangemaakt",
+                    type: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
-        //this.http.fetch('reaction/store', {
-        //    body: json(this.reaction)
-        //}).then(response => {
-        //    if (response.status == 200) {
-        //        swal({
-        //            title: "Reactie succesvol aangemaakt",
-        //            type: "success",
-        //            showConfirmButton: false,
-        //            timer: 2000
-        //        });
-
-        //        this.reaction = {};
-        //    }
-        //});
+                console.log(data);
+                this.message.reactions.push(data);
+            });
     }
 }
 

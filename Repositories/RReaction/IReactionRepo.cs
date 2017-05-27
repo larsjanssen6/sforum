@@ -10,5 +10,7 @@ namespace Killerapp.Repositories.RReaction
         List<ReactionModel> index(int messageId);
         void destroy(int id);
         void store(ReactionModel reaction, int authId);
+        void update(ReactionModel reaction);
+        ReactionModel find(int id);
     }
 }

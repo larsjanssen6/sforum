@@ -5,12 +5,9 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class editForum {
 
-    public forum: {};
+    public forum = new Forum();
 
-    constructor(private http: HttpClient, private router: Router) {
-        
-        this.getForum();
-    }
+    constructor(private http: HttpClient, private router: Router) {}
 
     created() {
         this.getForum();
@@ -40,4 +37,10 @@ export class editForum {
             }
         });
     }
+}
+
+export class Forum {
+    id: number;
+    name: string;
+    description: string;
 }

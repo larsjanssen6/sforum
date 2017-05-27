@@ -22,19 +22,27 @@ namespace Killerapp.Controllers.Message
 
         [HttpPost]
         [Authorize(Roles = "user")]
-        public IActionResult destroy([FromBody] ReactionModel reaction)
+        public IActionResult store([FromBody] ReactionModel reaction)
         {
-            reactionRepo.destroy(reaction.id);
+            int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
+            reactionRepo.store(reaction, authId);
+            return Json(reactionRepo.find(reaction.id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult update([FromBody] ReactionModel reaction)
+        {
+            reactionRepo.update(reaction);
             return StatusCode(200);
         }
 
         [HttpPost]
         [Authorize(Roles = "user")]
-        public IActionResult store([FromBody] ReactionModel reaction)
+        public IActionResult destroy([FromBody] ReactionModel reaction)
         {
-          int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
-          reactionRepo.store(reaction, authId);
-          return StatusCode(200);
+            reactionRepo.destroy(reaction.id);
+            return StatusCode(200);
         }
     }
 }

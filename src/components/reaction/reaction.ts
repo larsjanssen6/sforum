@@ -13,9 +13,6 @@ export class reaction {
         this.editing = false;
     }    
 
-    update() {
-
-    }
 
     destroy() {
         swal({
@@ -42,5 +39,23 @@ export class reaction {
                 });
             }
         });
+    }
+
+    update() {
+        this.http.fetch('reaction/update', {
+            body: json(this.reaction)
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    swal({
+                        title: "Reactie succesvol geupdatet",
+                        type: "success",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+
+                this.editing = false;
+            });
     }
 }

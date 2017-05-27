@@ -82,6 +82,58 @@ namespace Killerapp.Repositories.RReaction
             }
         }
 
+        public ReactionModel find(int id)
+        {
+            ReactionModel reaction = new ReactionModel();
+
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("select r.id, r.reaction, a.name, a.last_name from reaction r inner join account a on r.account_id = a.id where r.id = @reactionId", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@reactionId", id);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        reaction.id = Convert.ToInt32(reader["id"]);
+                        reaction.name = reader["name"].ToString();
+                        reaction.lastName = reader["last_name"].ToString();
+                        reaction.reaction = reader["reaction"].ToString();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return reaction;
+        }
+
+        public void update(ReactionModel reaction)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("update reaction set reaction = @reaction where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", reaction.id);
+                sqlCommand.Parameters.AddWithValue("@reaction", reaction.reaction);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
         public void destroy(int id)
         {
             try
