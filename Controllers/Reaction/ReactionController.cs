@@ -25,8 +25,8 @@ namespace Killerapp.Controllers.Message
         public IActionResult store([FromBody] ReactionModel reaction)
         {
             int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
-            reactionRepo.store(reaction, authId);
-            return Json(reactionRepo.find(reaction.id));
+            int id = reactionRepo.store(reaction, authId);
+            return Json(reactionRepo.find(id));
         }
 
         [HttpPost]

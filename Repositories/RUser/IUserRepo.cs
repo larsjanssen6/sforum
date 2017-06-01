@@ -10,6 +10,8 @@ namespace Proftaak.Repositories.UserRepo
     {
         bool login(string email, string password);
         List<UserModel> index();
+        void destroy(int id);
         UserModel find(string email);
+        UserModel find(int id);
     }
 }

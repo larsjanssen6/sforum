@@ -103,7 +103,7 @@ namespace Killerapp.Repositories.RMessage
                 SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message)", connection.getConnection());
                 connection.Connect();
 
-                sqlCommand.Parameters.AddWithValue("@forum_id", 1);
+                sqlCommand.Parameters.AddWithValue("@forum_id", message.forum);
                 sqlCommand.Parameters.AddWithValue("@account_id", authId);
                 sqlCommand.Parameters.AddWithValue("@software_id", message.software);
                 sqlCommand.Parameters.AddWithValue("@subject", message.subject);

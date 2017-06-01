@@ -7,6 +7,7 @@ using Killerapp.Repositories.RForum;
 using Proftaak;
 using Microsoft.AspNetCore.Authorization;
 using Proftaak.Repositories.UserRepo;
+using Killerapp.Repositories.User;
 
 namespace Killerapp.Controllers.User
 {
@@ -25,6 +26,21 @@ namespace Killerapp.Controllers.User
         public JsonResult index()
         {
             return Json(userRepo.index());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public JsonResult show([FromBody] int id)
+        {
+            return Json(userRepo.find(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult destroy([FromBody] UserModel user)
+        {
+            userRepo.destroy(user.id);
+            return StatusCode(200);
         }
     }
 }

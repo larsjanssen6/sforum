@@ -56,11 +56,13 @@ namespace Killerapp.Repositories.RReaction
             return reactions;
         }
 
-        public void store(ReactionModel reaction, int authId)
+        public int store(ReactionModel reaction, int authId)
         {
+            int id;
+
             try
             {
-                SqlCommand sqlCommand = new SqlCommand("insert into reaction (account_id, message_id, reaction) VALUES (@account_id, @message_id, @reaction)", connection.getConnection());
+                SqlCommand sqlCommand = new SqlCommand("insert into reaction (account_id, message_id, reaction) VALUES (@account_id, @message_id, @reaction) select scope_identity()", connection.getConnection());
                 connection.Connect();
 
                 sqlCommand.Parameters.AddWithValue("@account_id", authId);
@@ -68,7 +70,8 @@ namespace Killerapp.Repositories.RReaction
                 sqlCommand.Parameters.AddWithValue("@reaction", reaction.reaction);
                 sqlCommand.Connection = connection.getConnection();
 
-                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Connection = connection.getConnection();
+                id = (int)(decimal)sqlCommand.ExecuteScalar();
             }
 
             catch (Exception)
@@ -80,6 +83,8 @@ namespace Killerapp.Repositories.RReaction
             {
                 connection.disConnect();
             }
+
+            return id;
         }
 
         public ReactionModel find(int id)

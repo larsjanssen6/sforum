@@ -88,6 +88,12 @@ export class App {
                 auth: true
             },
             {
+                route: ['gebruiker/bewerk/:id'],
+                name: 'editUser',
+                moduleId: 'components/user/editUser',
+                auth: true
+            },
+            {
                 route: ['gebruikers'],
                 name: 'users',
                 moduleId: 'components/user/users',

@@ -7,7 +7,7 @@ import { AuthService } from 'aurelia-authentication';
 @autoinject
 export class newMessage {
 
-    public message: { message: "", subject: "", forum: 1, software: "" };
+    public message = new Message();
     public softwares: Software[] = [];
 
     constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
@@ -25,6 +25,8 @@ export class newMessage {
     }
 
     store() {
+        this.message.forum = this.router.currentInstruction.params.id;
+
         this.http.fetch('message/store', {
             body: json(this.message)
         }).then(response => {
@@ -45,6 +47,14 @@ export class newMessage {
 export class Software {
     corporation_id: number;
     name: string;
+}
+
+export class Message {
+    id: number;
+    message: string;
+    subject: string;
+    forum: number;
+    software: number;
 }
 
 
