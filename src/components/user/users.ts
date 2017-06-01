@@ -29,20 +29,22 @@ export class users {
             confirmButtonText: 'Ja verwijder deze gebruiker',
             cancelButtonText: 'Stop!',
             confirmButtonColor: '#002e5b',
-        }, (forum) => {
-            this.http.fetch('user/destroy', {
-                body: json(user)
-            })
-                .then(data => {
-                    swal({
-                        title: 'Verwijderd',
-                        text: 'Gebruiker is succesvol verwijderd',
-                        type: 'success',
-                        showConfirmButton: false,
-                    });
+        }, (ok) => {
+            if (ok) {
+                this.http.fetch('user/destroy', {
+                    body: json(user)
+                })
+                    .then(data => {
+                        swal({
+                            title: 'Verwijderd',
+                            text: 'Gebruiker is succesvol verwijderd',
+                            type: 'success',
+                            showConfirmButton: false,
+                        });
 
-                    this.users = this.users.filter((obj) => obj.id != user.id);
-                });
+                        this.users = this.users.filter((obj) => obj.id != user.id);
+                    });
+            }         
         });
     }
 

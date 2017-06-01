@@ -16,14 +16,14 @@ namespace Killerapp.Repositories.Software
             this.connection = connection;
         }
 
-        public List<Software> index(int id)
+        public List<SoftwareModel> index(int id)
         {
-            Software software;
-            List<Software> softwares = new List<Software>();
+            SoftwareModel software;
+            List<SoftwareModel> softwares = new List<SoftwareModel>();
             try
             {
                 connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("select * from software where corporation_id=@corporationId", connection.getConnection());
+                SqlCommand sqlCommand = new SqlCommand("select s.id, s.name as name, c.name as corporation from software s inner join corporation c on c.id = s.corporation_id  where s.corporation_id=@corporationId", connection.getConnection());
                 sqlCommand.Parameters.AddWithValue("@corporationId", id);
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
@@ -31,9 +31,10 @@ namespace Killerapp.Repositories.Software
                 {
                     while (reader.Read())
                     {
-                        software = new Software();
+                        software = new SoftwareModel();
                         software.id = Convert.ToInt32(reader["id"]);
                         software.name = reader["name"].ToString();
+                        software.corporation = reader["corporation"].ToString();
                         softwares.Add(software);
                     }
                 }
@@ -50,6 +51,28 @@ namespace Killerapp.Repositories.Software
               }
 
               return softwares;
+        }
+
+        public void destroy(int id)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("delete software where id=@id;", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.ExecuteNonQuery();
+                connection.disConnect();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
         }
     }
 }

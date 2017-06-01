@@ -95,6 +95,28 @@ namespace Proftaak.Repositories.UserRepo
             return users;
         }
 
+        public void update(UserModel user)
+        {
+            try
+            {
+                //connection.Connect();
+                //SqlCommand sqlCommand = new SqlCommand("update account set subject = @subject, message = @message where id = @id", connection.getConnection());
+                //sqlCommand.Parameters.AddWithValue("@subject", message.subject);
+                //sqlCommand.Parameters.AddWithValue("@message", message.message);
+                //sqlCommand.Parameters.AddWithValue("@id", message.id);
+                //sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            { 
+                connection.disConnect();
+            }
+        }
+
         public void destroy(int id)
         {
             try

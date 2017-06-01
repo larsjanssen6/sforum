@@ -19,7 +19,7 @@ export class dashboard {
             });
     }
 
-    destroy($event, forum) {
+    destroy(event, forum) {
         event.stopPropagation();
         swal({
             title: 'Weet u het zeker?',

@@ -1,55 +1,54 @@
 ﻿<template>
-  <style>
-    .bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #002e5b;
-      color: #FFFFFF;
-      height: 100px;
-      margin-bottom: 20px;
-      font-weight: 300;
-      font-size: 50px;
-      text-transform: uppercase;
-    }
-
-    }
-
-    navbar {
-      margin: 0px !important;
-    }
-  </style>
+  <require from='../shared/sideBar'></require>
 
   <div class="bar">
     <h1>Software</h1>
   </div>
 
-  <div class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="col-md-5">
-            Naam
-        </tr>
-      </thead>
+  <div class="container-custom">
+    <div class="row">
+      <side-bar>
+        <div slot="buttons">
+          <a route-href="route: newSoftware" class="btn btn-primary btn-block margin__bottom__small">Nieuwe software</a>
+        </div>
+      </side-bar>
 
-      <tbody>
-        <tr repeat.for="software of softwares">
-          <td class="col-md-4">
-            ${software.name}
-          </td>
+      <div class="col-md-10">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-3 table__title">
+                    Naam
+                  </th>
 
-          <td></td>
+                  <th class="col-md-3 table__title">
+                    Corporation
+                  </th>
+                </tr>
+              </thead>
 
-          <td>
-            <i class="material-icons" click.trigger="destroy(forum)">&#xE872;</i>
+              <tbody>
+                <tr repeat.for="software of softwares">
+                  <td class="col-md-3">
+                    ${software.name}
+                  </td>
 
-            <a href="#">
-              <i class="material-icons">&#xE254;</i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                  <td class="col-md-3">
+                    ${software.corporation}
+                  </td>
+
+                  <td>
+                    <i class="material-icons" click.delegate="destroy($event, software)">&#xE872;</i>
+                    <i class="material-icons" click.delegate="editUrl($event, software)">&#xE254;</i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -11,6 +11,7 @@ namespace Proftaak.Repositories.UserRepo
         bool login(string email, string password);
         List<UserModel> index();
         void destroy(int id);
+        void update(UserModel user);
         UserModel find(string email);
         UserModel find(int id);
     }

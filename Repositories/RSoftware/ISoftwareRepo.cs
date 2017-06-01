@@ -7,6 +7,7 @@ namespace Killerapp.Repositories.Software
 {
     interface ISoftwareRepo
     {
-        List<Software> index(int id);
+        List<SoftwareModel> index(int id);
+        void destroy(int id);
     }
 }
