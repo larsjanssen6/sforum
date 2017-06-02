@@ -20,136 +20,82 @@ namespace Killerapp.Repositories.Software
         {
             SoftwareModel software;
             List<SoftwareModel> softwares = new List<SoftwareModel>();
-            try
+
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("select s.id, s.name as name, c.name as corporation from software s inner join corporation c on c.id = s.corporation_id  where s.corporation_id=@corporationId", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@corporationId", id);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            if (reader.HasRows)
             {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("select s.id, s.name as name, c.name as corporation from software s inner join corporation c on c.id = s.corporation_id  where s.corporation_id=@corporationId", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@corporationId", id);
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        software = new SoftwareModel();
-                        software.id = Convert.ToInt32(reader["id"]);
-                        software.name = reader["name"].ToString();
-                        software.corporation = reader["corporation"].ToString();
-                        softwares.Add(software);
-                    }
+                    software = new SoftwareModel();
+                    software.id = Convert.ToInt32(reader["id"]);
+                    software.name = reader["name"].ToString();
+                    software.corporation = reader["corporation"].ToString();
+                    softwares.Add(software);
                 }
-              }
-
-              catch (Exception)
-              {
-                  throw;
-              }
-
-              finally
-              {
-                  connection.disConnect();
-              }
-
-              return softwares;
+            }
+              
+            connection.disConnect();            
+            return softwares;
         }
 
         public SoftwareModel find(int id)
         {
             SoftwareModel software = new SoftwareModel();
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("select id, name, corporation_id from software where id = @softwareId", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@softwareId", id);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
 
-            try
+            if (reader.HasRows)
             {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("select id, name, corporation_id from software where id = @softwareId", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@softwareId", id);
-                SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                if (reader.HasRows)
+                while (reader.Read())
                 {
-                  while (reader.Read())
-                  {
-                      software.id = Convert.ToInt32(reader["id"]);
-                      software.name = reader["name"].ToString();
-                      software.corporation_id = Convert.ToInt32(reader["corporation_id"]);
-                  }
+                    software.id = Convert.ToInt32(reader["id"]);
+                    software.name = reader["name"].ToString();
+                    software.corporation_id = Convert.ToInt32(reader["corporation_id"]);
                 }
             }
 
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            connection.disConnect();
             return software;
         }
 
         public void store(SoftwareModel software)
         {
-            try
-            {
-                SqlCommand sqlCommand = new SqlCommand("insert into software (name, corporation_id) VALUES (@name, @corporation_id)", connection.getConnection());
-                connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("insert into software (name, corporation_id) VALUES (@name, @corporation_id)", connection.getConnection());
+            connection.Connect();
 
-                sqlCommand.Parameters.AddWithValue("@name", software.name);
-                sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
-                sqlCommand.Connection = connection.getConnection();
+            sqlCommand.Parameters.AddWithValue("@name", software.name);
+            sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
+            sqlCommand.Connection = connection.getConnection();
 
-                sqlCommand.ExecuteNonQuery();
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            sqlCommand.ExecuteNonQuery();
+          
+            connection.disConnect();            
         }
 
         public void destroy(int id)
         {
-            try
-            {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("delete software where id=@id;", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@id", id);
-                sqlCommand.ExecuteNonQuery();
-                connection.disConnect();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("delete software where id=@id;", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.ExecuteNonQuery();
+            connection.disConnect();                   
         }
 
         public void update(SoftwareModel software)
         {
-            try
-            {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("update software set name = @name, corporation_id = @corporation_id where id = @id", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@id", software.id);
-                sqlCommand.Parameters.AddWithValue("@name", software.name);
-                sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("update software set name = @name, corporation_id = @corporation_id where id = @id", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@id", software.id);
+            sqlCommand.Parameters.AddWithValue("@name", software.name);
+            sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
+            sqlCommand.ExecuteNonQuery();
+            connection.disConnect();          
         }
     }
 }

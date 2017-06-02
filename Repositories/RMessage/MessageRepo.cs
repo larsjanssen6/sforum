@@ -15,157 +15,103 @@ namespace Killerapp.Repositories.RMessage
 
         public MessageRepo(ConnectionInterface connection, IReactionRepo reactionRepo)
         {
-          this.connection = connection;
-          this.reactionRepo = reactionRepo;
+            this.connection = connection;
+            this.reactionRepo = reactionRepo;
         }
 
         public List<MessageModel> index(int forumId)
         {
-              MessageModel message;
-              List<MessageModel> messages = new List<MessageModel>();
+            MessageModel message;
+            List<MessageModel> messages = new List<MessageModel>();
 
-              try
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.forum_id = @forumId", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@forumId", forumId);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
                 {
-                  connection.Connect();
-                  SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.forum_id = @forumId", connection.getConnection());
-                  sqlCommand.Parameters.AddWithValue("@forumId", forumId);
-                  SqlDataReader reader = sqlCommand.ExecuteReader();
-
-                  if (reader.HasRows)
-                  {
-                      while (reader.Read())
-                      {
-                          message = new MessageModel();
-                          message.id = Convert.ToInt32(reader["id"]);
-                          message.forum = reader["forum"].ToString();
-                          message.user = reader["name"].ToString();
-                          message.software = reader["software"].ToString();
-                          message.subject = reader["subject"].ToString();
-                          message.message = reader["message"].ToString();
-                          messages.Add(message);
-                      }
-                  }
-              }
-
-              catch (Exception)
-              {
-                  throw;
-              }
-
-              finally
-              {
-                  connection.disConnect();
-              }
-
-              return messages;
+                    message = new MessageModel();
+                    message.id = Convert.ToInt32(reader["id"]);
+                    message.forum = reader["forum"].ToString();
+                    message.user = reader["name"].ToString();
+                    message.software = reader["software"].ToString();
+                    message.subject = reader["subject"].ToString();
+                    message.message = reader["message"].ToString();
+                    messages.Add(message);
+                }
+            }
+             
+            connection.disConnect();             
+            return messages;
         }
 
         public MessageModel find(int id)
         {
             MessageModel message = new MessageModel();
 
-            try
-            {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.id = @id", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@id", id);
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("select m.id, f.name as forum, a.name as name, s.name as software, m.subject as subject, m.message as message from message m inner join forum f on f.id = m.forum_id inner join account a on a.id = m.account_id inner join software s on s.id = m.software_id where m.id = @id", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                if (reader.HasRows)
+            if (reader.HasRows)
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        message.id = Convert.ToInt32(reader["id"]);
-                        message.forum = reader["forum"].ToString();
-                        message.user = reader["name"].ToString();
-                        message.software = reader["software"].ToString();
-                        message.subject = reader["subject"].ToString();
-                        message.message = reader["message"].ToString();
-                    }
+                    message.id = Convert.ToInt32(reader["id"]);
+                    message.forum = reader["forum"].ToString();
+                    message.user = reader["name"].ToString();
+                    message.software = reader["software"].ToString();
+                    message.subject = reader["subject"].ToString();
+                    message.message = reader["message"].ToString();
                 }
-
-                message.reactions = new List<ReactionModel>();
-                message.reactions = reactionRepo.index(message.id);
             }
 
-            catch (Exception ex)
-            {
-                throw;
-            }
+            message.reactions = new List<ReactionModel>();
+            message.reactions = reactionRepo.index(message.id);
+            connection.disConnect();
 
             return message;
         }
 
         public void store(MessageModel message, int authId)
         {
-            try
-            {
-                SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message)", connection.getConnection());
-                connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message)", connection.getConnection());
+            connection.Connect();
 
-                sqlCommand.Parameters.AddWithValue("@forum_id", message.forum);
-                sqlCommand.Parameters.AddWithValue("@account_id", authId);
-                sqlCommand.Parameters.AddWithValue("@software_id", message.software);
-                sqlCommand.Parameters.AddWithValue("@subject", message.subject);
-                sqlCommand.Parameters.AddWithValue("@message", message.message);
-                sqlCommand.Connection = connection.getConnection();
+            sqlCommand.Parameters.AddWithValue("@forum_id", message.forum);
+            sqlCommand.Parameters.AddWithValue("@account_id", authId);
+            sqlCommand.Parameters.AddWithValue("@software_id", message.software);
+            sqlCommand.Parameters.AddWithValue("@subject", message.subject);
+            sqlCommand.Parameters.AddWithValue("@message", message.message);
+            sqlCommand.Connection = connection.getConnection();
 
-                sqlCommand.ExecuteNonQuery();
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            sqlCommand.ExecuteNonQuery();           
+            connection.disConnect();            
         }
 
         public void update(MessageModel message)
         {
-            try
-            {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("update message set subject = @subject, message = @message where id = @id", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@subject", message.subject);
-                sqlCommand.Parameters.AddWithValue("@message", message.message);
-                sqlCommand.Parameters.AddWithValue("@id", message.id);
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("update message set subject = @subject, message = @message where id = @id", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@subject", message.subject);
+            sqlCommand.Parameters.AddWithValue("@message", message.message);
+            sqlCommand.Parameters.AddWithValue("@id", message.id);
+            sqlCommand.ExecuteNonQuery();
+            
+            connection.disConnect();         
         }
 
         public void destroy(int id)
         {
-            try
-            {
-                connection.Connect();
-                SqlCommand sqlCommand = new SqlCommand("delete message where id=@id;", connection.getConnection());
-                sqlCommand.Parameters.AddWithValue("@id", id);
-                sqlCommand.ExecuteNonQuery();
-                connection.disConnect();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            finally
-            {
-                connection.disConnect();
-            }
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("delete message where id=@id;", connection.getConnection());
+            sqlCommand.Parameters.AddWithValue("@id", id);
+            sqlCommand.ExecuteNonQuery();                  
+            connection.disConnect();           
         }
   }
 }
