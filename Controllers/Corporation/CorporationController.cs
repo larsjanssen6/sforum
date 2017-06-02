@@ -14,10 +14,15 @@ namespace Killerapp.Controllers.Corporation
     {
         ICorporationRepo corporationRepo;
 
+        //Init constructor
+
         public CorporationController()
         {
             corporationRepo = new CorporationRepo(new Connection());
         }
+        
+        
+        //Return all corporations
 
         [HttpPost]
         public JsonResult index()
@@ -25,12 +30,16 @@ namespace Killerapp.Controllers.Corporation
             return Json(corporationRepo.index());
         }
 
+        //Return one corporation
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult show([FromBody] int id)
         {
           return Json(corporationRepo.find(id));
         }
+
+        //Store a corporation
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -40,6 +49,8 @@ namespace Killerapp.Controllers.Corporation
             return StatusCode(200);
         }
 
+        //Update a corporation
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] CorporationModel corporation)
@@ -48,6 +59,7 @@ namespace Killerapp.Controllers.Corporation
             return StatusCode(200);
         }
 
+        //Destroy a corporation 
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] CorporationModel corporation)

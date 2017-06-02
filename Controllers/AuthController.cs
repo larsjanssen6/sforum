@@ -47,10 +47,13 @@ namespace AureliaTest.Controllers
 
         IUserRepo userRepo;
 
+        //Init constructor 
         public AuthController()
         {
             userRepo = new UserRepo(new Connection());
         }
+
+        //Sign a user in
 
         [HttpPost]
         public AccessToken Login([FromBody] dynamic credentials)
@@ -64,7 +67,8 @@ namespace AureliaTest.Controllers
 
             return CreateAccessToken(user.id.ToString(), user.email, user.name, user.corporation_id.ToString(), new[] { "user" });
         }
-   
+
+        //Generate acces token
 
         private static AccessToken CreateAccessToken(string id, 
                                                      string email, 

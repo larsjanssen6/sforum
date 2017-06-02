@@ -16,10 +16,14 @@ namespace Killerapp.Controllers.Message
     {
         IMessageRepo messageRepo;
 
+        //Init constructor 
+
         public MessageController()
         {
             messageRepo = new MessageRepo(new Connection(), new ReactionRepo(new Connection()));
         }
+
+        //Return all messages
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -27,6 +31,8 @@ namespace Killerapp.Controllers.Message
         {
             return Json(messageRepo.index(forumId));
         }
+
+        //Store a user
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -37,12 +43,16 @@ namespace Killerapp.Controllers.Message
             return StatusCode(200);
         }
 
+        //Show a message
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult show([FromBody] int id)
         {
             return Json(messageRepo.find(id));
         }
+
+        //Update a message
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -51,6 +61,8 @@ namespace Killerapp.Controllers.Message
             messageRepo.update(message);
             return StatusCode(200);
         }
+
+        //Destroy a message
 
         [HttpPost]
         [Authorize(Roles = "user")]

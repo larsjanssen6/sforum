@@ -16,10 +16,14 @@ namespace Killerapp.Controllers.User
     {
         IUserRepo userRepo;
 
+        //Init constructor
+
         public UserController()
         {
             userRepo = new UserRepo(new Connection());
         }
+        
+        //Return all users
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -28,12 +32,16 @@ namespace Killerapp.Controllers.User
             return Json(userRepo.index());
         }
 
+        //Return one user
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public JsonResult show([FromBody] int id)
         {
             return Json(userRepo.find(id));
         }
+
+        //Store a user
 
         [HttpPost]
         public IActionResult store([FromBody] UserModel user)
@@ -42,6 +50,8 @@ namespace Killerapp.Controllers.User
            return StatusCode(200);
         }
 
+        //Update a user
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] UserModel user)
@@ -49,6 +59,8 @@ namespace Killerapp.Controllers.User
             userRepo.update(user);
             return StatusCode(200);
         }
+
+        //Destroy a reaction
 
         [HttpPost]
         [Authorize(Roles = "user")]

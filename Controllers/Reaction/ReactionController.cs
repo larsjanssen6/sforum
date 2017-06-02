@@ -15,10 +15,14 @@ namespace Killerapp.Controllers.Message
     {
         IReactionRepo reactionRepo;
 
+        //Init constructor
+
         public ReactionController()
         {
             reactionRepo = new ReactionRepo(new Connection());
         }
+
+        //Store a reaction
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -29,6 +33,8 @@ namespace Killerapp.Controllers.Message
             return Json(reactionRepo.find(id));
         }
 
+        //Update a reaction
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] ReactionModel reaction)
@@ -36,6 +42,8 @@ namespace Killerapp.Controllers.Message
             reactionRepo.update(reaction);
             return StatusCode(200);
         }
+
+        //Destroy a reaction
 
         [HttpPost]
         [Authorize(Roles = "user")]
