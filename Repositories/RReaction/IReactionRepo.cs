@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.RReaction
 {
     public interface IReactionRepo
     {
+        // A reaction repo must implement this interface
+
         List<ReactionModel> index(int messageId);
         void destroy(int id);
         int store(ReactionModel reaction, int authId);

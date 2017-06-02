@@ -12,10 +12,14 @@ namespace Killerapp.Repositories.RReaction
     {
         ConnectionInterface connection;
 
+        //Init constructor
+
         public ReactionRepo(ConnectionInterface connection)
         {
             this.connection = connection;
         }
+        
+        //Return all reactions
 
         public List<ReactionModel> index(int messageId)
         {
@@ -43,6 +47,8 @@ namespace Killerapp.Repositories.RReaction
             connection.disConnect();          
             return reactions;
         }
+        
+        //Store a reaction
 
         public int store(ReactionModel reaction, int authId)
         {
@@ -62,6 +68,8 @@ namespace Killerapp.Repositories.RReaction
             connection.disConnect();
             return id;
         }
+
+        //Return one reaction
 
         public ReactionModel find(int id)
         {
@@ -85,6 +93,8 @@ namespace Killerapp.Repositories.RReaction
             connection.disConnect();
             return reaction;
         }
+        
+        //Update a reaction
 
         public void update(ReactionModel reaction)
         {
@@ -96,6 +106,8 @@ namespace Killerapp.Repositories.RReaction
           
             connection.disConnect();          
         }
+        
+        //Destroy a reaction
 
         public void destroy(int id)
         {

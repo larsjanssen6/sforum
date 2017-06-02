@@ -8,6 +8,8 @@ namespace Killerapp.Repositories.RForum
 {
     interface IForumRepo
     {
+        // A forum repo must implement this interface
+
         List<ForumModel> index();
         ForumModel find(int id);
         void store(ForumModel forum);

@@ -8,6 +8,8 @@ namespace Proftaak.Repositories.UserRepo
 {
     interface IUserRepo
     {
+        // A user repo must implement this interface
+
         bool login(string email, string password);
         List<UserModel> index();
         void destroy(int id);

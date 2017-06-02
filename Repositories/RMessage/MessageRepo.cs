@@ -13,11 +13,15 @@ namespace Killerapp.Repositories.RMessage
         ConnectionInterface connection;
         IReactionRepo reactionRepo;
 
+        //Init constructor
+
         public MessageRepo(ConnectionInterface connection, IReactionRepo reactionRepo)
         {
             this.connection = connection;
             this.reactionRepo = reactionRepo;
         }
+        
+        //Return all messages based on a forum
 
         public List<MessageModel> index(int forumId)
         {
@@ -47,6 +51,8 @@ namespace Killerapp.Repositories.RMessage
             connection.disConnect();             
             return messages;
         }
+        
+        //Return one message
 
         public MessageModel find(int id)
         {
@@ -76,6 +82,9 @@ namespace Killerapp.Repositories.RMessage
 
             return message;
         }
+        
+
+        //Store a message
 
         public void store(MessageModel message, int authId)
         {
@@ -92,6 +101,8 @@ namespace Killerapp.Repositories.RMessage
             sqlCommand.ExecuteNonQuery();           
             connection.disConnect();            
         }
+        
+        //Update a message
 
         public void update(MessageModel message)
         {
@@ -104,6 +115,8 @@ namespace Killerapp.Repositories.RMessage
             
             connection.disConnect();         
         }
+        
+        //Destroy a message
 
         public void destroy(int id)
         {

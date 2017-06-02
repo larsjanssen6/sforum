@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.RCorporation
 {
     interface ICorporationRepo
     {
+        // A corporation repo must implement this interface
+
         List<CorporationModel> index();
         void destroy(int id);
         void store(CorporationModel corporation);

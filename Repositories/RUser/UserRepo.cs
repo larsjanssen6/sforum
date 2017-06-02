@@ -12,10 +12,14 @@ namespace Proftaak.Repositories.UserRepo
     {
         ConnectionInterface connection;
 
+        //Init constructor
+
         public UserRepo(ConnectionInterface connection)
         {
             this.connection = connection;
         }
+         
+        //Sign in
 
         public bool login(string email, string password)
         {
@@ -40,6 +44,8 @@ namespace Proftaak.Repositories.UserRepo
             connection.disConnect();           
             return passwordDatabase == password;
         }
+        
+        //Return all users
 
         public List<UserModel> index()
         {
@@ -71,6 +77,8 @@ namespace Proftaak.Repositories.UserRepo
             connection.disConnect();         
             return users;
         }
+        
+        //Store a user
 
         public void store(UserModel user)
         {
@@ -90,6 +98,8 @@ namespace Proftaak.Repositories.UserRepo
                
             connection.disConnect();          
         }
+        
+        //Update a user
 
         public void update(UserModel user)
         {
@@ -109,6 +119,8 @@ namespace Proftaak.Repositories.UserRepo
                     
             connection.disConnect();         
         }
+        
+        //Destroy a user
 
         public void destroy(int id)
         {
@@ -118,6 +130,8 @@ namespace Proftaak.Repositories.UserRepo
             sqlCommand.ExecuteNonQuery();
             connection.disConnect();          
         }
+        
+        //Return one user based on an id
 
         public UserModel find(int id)
         {
@@ -149,6 +163,8 @@ namespace Proftaak.Repositories.UserRepo
             connection.disConnect();
             return user;
         }
+        
+        //Return one user based on an email address
 
         public UserModel find(string email)
         {

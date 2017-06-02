@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.RReaction
 {
     public class ReactionModel
     {
+        //These values belong to a reaction
+
         public int id { get; set; }
         public string name { get; set; }
         public string lastName { get; set; }

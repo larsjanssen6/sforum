@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.User
 {
     public class UserModel
     {
+        //These values belong to a user
+
         public int id { get; set; }
         public int corporation_id { get; set; }
         public int role { get; set; }

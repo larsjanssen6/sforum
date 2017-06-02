@@ -8,6 +8,8 @@ namespace Killerapp.Repositories.RMessage
 {
     public class MessageModel
     {
+        //These values belong to a message
+
         public int id;
         public string forum;
         public string user;

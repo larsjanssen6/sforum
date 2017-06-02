@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.RCorporation
 {
     public class CorporationModel
     {
+        //These values belong to a corporation
+
         public int id { get; set; }
         public string name { get; set; }
         public string address { get; set; }

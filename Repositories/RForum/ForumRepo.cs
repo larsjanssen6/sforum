@@ -11,10 +11,14 @@ namespace Killerapp.Repositories.RForum
     {
         ConnectionInterface connection;
 
+        //Init constructor
+
         public ForumRepo(ConnectionInterface connection)
         {
           this.connection = connection;
         }
+        
+        //Return all forums
 
         public List<ForumModel> index()
         {
@@ -40,6 +44,8 @@ namespace Killerapp.Repositories.RForum
             connection.disConnect();
             return forums;
         }
+        
+        //Find a forum
 
         public ForumModel find(int id)
         {
@@ -63,6 +69,8 @@ namespace Killerapp.Repositories.RForum
             connection.disConnect();
             return forum;
         }
+        
+        //Store a forum
 
         public void store(ForumModel forum)
         {
@@ -76,6 +84,8 @@ namespace Killerapp.Repositories.RForum
             sqlCommand.ExecuteNonQuery();                      
             connection.disConnect();          
         }
+        
+        //Update a forum
 
         public void update(ForumModel forum)
         {
@@ -88,6 +98,8 @@ namespace Killerapp.Repositories.RForum
                      
             connection.disConnect();           
         }
+        
+        //Destroy a forum
 
         public void destroy(int id)
         {

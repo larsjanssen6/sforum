@@ -5,7 +5,9 @@ namespace Killerapp.Repositories.RMessage
 {
     interface IMessageRepo
     {
-        List<MessageModel> index(int forumId);
+        // A message repo must implement this interface
+
+    List<MessageModel> index(int forumId);
         void store(MessageModel message, int accountId);
         MessageModel find(int id);
         void update(MessageModel message);

@@ -11,10 +11,14 @@ namespace Killerapp.Repositories.Software
     {
         ConnectionInterface connection;
 
-        public SoftwareRepo(ConnectionInterface connection)
+        //Init constructor
+
+        public SoftwareRepo(ConnectionInterface connection) 
         {
             this.connection = connection;
         }
+        
+        //Return all software
 
         public List<SoftwareModel> index(int id)
         {
@@ -41,6 +45,8 @@ namespace Killerapp.Repositories.Software
             connection.disConnect();            
             return softwares;
         }
+        
+        //Return one software
 
         public SoftwareModel find(int id)
         {
@@ -63,6 +69,8 @@ namespace Killerapp.Repositories.Software
             connection.disConnect();
             return software;
         }
+        
+        //Store software
 
         public void store(SoftwareModel software)
         {
@@ -77,6 +85,8 @@ namespace Killerapp.Repositories.Software
           
             connection.disConnect();            
         }
+        
+        //Destroy software
 
         public void destroy(int id)
         {
@@ -86,6 +96,8 @@ namespace Killerapp.Repositories.Software
             sqlCommand.ExecuteNonQuery();
             connection.disConnect();                   
         }
+        
+        //Update software
 
         public void update(SoftwareModel software)
         {

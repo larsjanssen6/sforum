@@ -7,6 +7,8 @@ namespace Killerapp.Repositories.Software
 {
     interface ISoftwareRepo
     {
+        // A  software repo must implement this interface
+
         List<SoftwareModel> index(int id);
         void destroy(int id);
         void update(SoftwareModel software);

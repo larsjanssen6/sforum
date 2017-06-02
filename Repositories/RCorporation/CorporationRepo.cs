@@ -10,11 +10,15 @@ namespace Killerapp.Repositories.RCorporation
     public class CorporationRepo : ICorporationRepo
     {
         ConnectionInterface connection;
+        
+        //Init constructor
 
         public CorporationRepo(ConnectionInterface connection)
         {
             this.connection = connection;
         }
+        
+        //Return all corporations
 
         public List<CorporationModel> index()
         {
@@ -42,6 +46,8 @@ namespace Killerapp.Repositories.RCorporation
             connection.disConnect();
             return corporations;
         }
+        
+        // Return a corporation
 
         public CorporationModel find(int id)
         {
@@ -67,6 +73,8 @@ namespace Killerapp.Repositories.RCorporation
             connection.disConnect();
             return corporation;
         }
+        
+        //Store a corporation
 
         public void store(CorporationModel corporation)
         {
@@ -84,6 +92,7 @@ namespace Killerapp.Repositories.RCorporation
             connection.disConnect();          
         }
 
+        //Update a corporation
 
         public void update(CorporationModel corporation)
         {
@@ -98,6 +107,8 @@ namespace Killerapp.Repositories.RCorporation
         
             connection.disConnect();         
         }
+        
+        //Destroy a corporation
 
         public void destroy(int id)
         {
