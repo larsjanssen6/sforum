@@ -32,7 +32,7 @@
             <div class="row">
               <div class="col-md-12 margin__top__small">
                 <div if.bind="editing">
-                  <textarea class="form-control margin__bottom__small" value.bind="message.message" name="message"></textarea>
+                  <textarea class="form-control margin__bottom__small" value.bind="message.message" name="message" required></textarea>
 
                   <button class="btn btn-xs btn-second" click.delegate="update()">Update</button>
                   <button class="btn btn-xs btn-link" click.delegate="editing = false">Annuleer</button>
