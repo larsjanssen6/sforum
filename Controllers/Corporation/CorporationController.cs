@@ -20,7 +20,6 @@ namespace Killerapp.Controllers.Corporation
         }
 
         [HttpPost]
-        [Authorize(Roles = "user")]
         public JsonResult index()
         {
             return Json(corporationRepo.index());

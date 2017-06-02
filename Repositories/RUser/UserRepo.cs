@@ -95,6 +95,36 @@ namespace Proftaak.Repositories.UserRepo
             return users;
         }
 
+        public void store(UserModel user)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("insert into account (name, last_name, corporation_id, role, gender, salary, email, about, password, birthdate) values(@name, @lastName, @corporation_id, @role, @gender, @salary, @email, @about, @password, '12-12-2017')", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", user.id);
+                sqlCommand.Parameters.AddWithValue("@name", user.name);
+                sqlCommand.Parameters.AddWithValue("@lastName", user.lastName);
+                sqlCommand.Parameters.AddWithValue("@corporation_id", user.corporation_id);
+                sqlCommand.Parameters.AddWithValue("@role", user.role);
+                sqlCommand.Parameters.AddWithValue("@gender", user.gender);
+                sqlCommand.Parameters.AddWithValue("@salary", user.salary);
+                sqlCommand.Parameters.AddWithValue("@email", user.email);
+                sqlCommand.Parameters.AddWithValue("@about", user.about);
+                sqlCommand.Parameters.AddWithValue("@password", user.password);
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
         public void update(UserModel user)
         {
             try

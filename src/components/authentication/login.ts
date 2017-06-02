@@ -46,8 +46,4 @@ export class login {
     logout() {
         this.auth.logout('');
     }
-
-    async test() {
-
-    }
 } 

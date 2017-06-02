@@ -14,5 +14,6 @@ namespace Proftaak.Repositories.UserRepo
         void update(UserModel user);
         UserModel find(string email);
         UserModel find(int id);
+        void store(UserModel user);
     }
 }

@@ -36,6 +36,13 @@ namespace Killerapp.Controllers.User
         }
 
         [HttpPost]
+        public IActionResult store([FromBody] UserModel user)
+        {
+           userRepo.store(user);
+           return StatusCode(200);
+        }
+
+        [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] UserModel user)
         {

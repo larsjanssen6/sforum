@@ -1,0 +1,117 @@
+﻿<template>
+  <div class="bar">
+    <h1>Registreer</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span>Registreer</span>
+          </div>
+
+          <div class="panel-body">
+            <form class="form-horizontal" role="form" method="POST" submit.delegate="store()">
+              <div class="form-group">
+                <label for="name" class="col-md-4 control-label">Naam</label>
+
+                <div class="col-md-6">
+                  <input value.bind="user.name" id="name" type="text" class="form-control" name="name" required autofocus>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="last_name" class="col-md-4 control-label">Achternaam</label>
+
+                <div class="col-md-6">
+                  <input value.bind="user.lastName" id="last_name" type="text" class="form-control" name="last_name" required autofocus>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="urgent" class="col-md-4 control-label">Corporatie</label>
+
+                <div class="col-md-6">
+                  <select class="form-control" value.bind="user.corporation_id" required>
+                    <option disabled value="">Selecteer corporatie</option>
+                    <option repeat.for="corporation of corporations" model.bind="corporation.id">${corporation.name}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="urgent" class="col-md-4 control-label">Role</label>
+                <div class="col-md-6">
+                  <select class="form-control" value.bind="user.role" required>
+                    <option disabled value="">Selecteer role</option>
+
+                    <option model.bind="1">
+                      Gebruiker
+                    </option>
+                    <option model.bind="2">
+                      Admin
+                    </option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="urgent" class="col-md-4 control-label">Geslacht</label>
+                <div class="col-md-6">
+                  <select class="form-control" value.bind="user.gender" required>
+                    <option disabled value="">Selecteer geslacht</option>
+
+                    <option model.bind="1">
+                      Man
+                    </option>
+                    <option model.bind="2">
+                      Vrouw
+                    </option>
+
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="salary" class="col-md-4 control-label">Salaris</label>
+
+                <div class="col-md-6">
+                  <input value.bind="user.salary" id="salary" type="text" class="form-control" name="salary" required autofocus>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="col-md-4 control-label">Email</label>
+
+                <div class="col-md-6">
+                  <input value.bind="user.email" id="email" type="email" class="form-control" name="description" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="about" class="col-md-4 control-label">Over mij</label>
+
+                <div class="col-md-6">
+                  <textarea value.bind="user.about" id="about" type="text" class="form-control" name="about" required></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-md-4 control-label">Wachtwoord</label>
+
+                <div class="col-md-6">
+                  <input value.bind="user.password" id="password" type="password" class="form-control" name="password" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                  <button id="submit" type="submit" class="btn btn-primary">
+                    Registreer
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
