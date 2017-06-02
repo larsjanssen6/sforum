@@ -8,6 +8,8 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 @autoinject
 export class editUser {
 
+    //This component makes sure a new user can be created
+
     public corporations: Corporation[] = [];
     public user = new User();
 

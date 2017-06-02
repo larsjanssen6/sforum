@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class dashboard {
 
+    //This component shows all forums
+
     public forums: ForumModel[] = [];
 
     constructor(private http: HttpClient, private router: Router) {

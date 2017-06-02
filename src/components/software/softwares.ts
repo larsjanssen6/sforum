@@ -7,6 +7,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class softwares {
 
+    //This components shows all software
+
     public softwares: SoftwareModel[] = [];
 
     constructor(private http: HttpClient, private authService: AuthService, private router: Router) {

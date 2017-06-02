@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class messages {
 
+    //This component shows all messages
+
     public messages: MessageModel[] = [];
     public forumId: number;
 

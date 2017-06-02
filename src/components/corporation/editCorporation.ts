@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class editCorporation {
 
+    //This component makes sure a corporation can be edited
+
     corporation: {}
 
     constructor(private http: HttpClient, private router: Router) {}

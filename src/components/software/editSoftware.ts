@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class editSoftware {
 
+    //This component makes sure software can be edited
+
     corporations = [];
     software: {};
 

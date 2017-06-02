@@ -5,6 +5,9 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 
 @autoinject
 export class reaction {
+
+    //This component shows a reaction
+
     @bindable reaction;
 
     editing: boolean;

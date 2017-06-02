@@ -4,6 +4,8 @@ import { autoinject } from "aurelia-framework"
 @autoinject
 export class newForum {
 
+    //This component makes sure a new forum can be created
+
     forum: { name: "", description: "" };
 
     constructor(private http: HttpClient) { }

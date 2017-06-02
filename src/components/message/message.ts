@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class message {
 
+    //This component shows a message
+
     message: {  reactions: Reaction[], id: "" };
     editing: boolean;
     reaction = new Reaction;

@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class editForum {
 
+    //This component makes sure a forum can be edited
+
     public forum = new Forum();
 
     constructor(private http: HttpClient, private router: Router) {}

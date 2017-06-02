@@ -8,6 +8,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class login {
 
+    //This component makes sure users can sign in
+
     email = "";
     password = "";
 

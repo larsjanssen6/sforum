@@ -7,6 +7,8 @@ import { AuthService } from 'aurelia-authentication';
 @autoinject
 export class newMessage {
 
+    //This component makes sure a new messages can be created
+
     public message = new Message();
     public softwares: Software[] = [];
 

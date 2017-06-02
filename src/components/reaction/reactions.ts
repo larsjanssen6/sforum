@@ -4,6 +4,9 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 
 @autoinject
 export class reactions {
+
+    //This component shows all messages
+
     @bindable reactions;
 
     constructor(public event: EventAggregator) {}  

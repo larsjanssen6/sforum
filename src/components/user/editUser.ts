@@ -7,6 +7,8 @@ import { AuthService } from 'aurelia-authentication';
 @autoinject
 export class editUser {
 
+    //This component makes sure a user can be edited
+
     public corporations: Corporation[] = [];
     public user = new User();
 

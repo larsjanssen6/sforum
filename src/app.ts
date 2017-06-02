@@ -10,6 +10,9 @@ import * as jwt_decode from 'jwt-decode';
 
 @autoinject
 export class App {
+
+    //This is the main entry point in this application. Everything is being bootstrap here
+
     router: Router;
     authenticated: boolean;
     currUrl: string;

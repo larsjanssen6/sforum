@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class users {
 
+    //This component returns all users
+
     users = [];
 
     constructor(private http: HttpClient, private router: Router) {

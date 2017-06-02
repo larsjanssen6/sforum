@@ -3,7 +3,9 @@ import { autoinject } from "aurelia-framework"
 import { Router } from 'aurelia-router'
 
 @autoinject
-export class editSoftware {
+export class newSoftware {
+
+    //This component makes sure new software can be created
 
     corporations = [];
     public software = new Software();

@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class corporations {
 
+    //This component shows all corporations
+
     corporations = [];
 
 

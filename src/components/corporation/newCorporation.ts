@@ -5,6 +5,8 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class newCorporation {
 
+    //This component makes sure a new corporation can be created
+
     corporation: {}
 
     constructor(private http: HttpClient, private router: Router) { }
