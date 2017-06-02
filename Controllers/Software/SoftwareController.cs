@@ -29,6 +29,21 @@ namespace Killerapp.Controllers.Software
 
         [HttpPost]
         [Authorize(Roles = "user")]
+        public JsonResult show([FromBody] int id)
+        {
+            return Json(softwareRepo.find(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult update([FromBody] SoftwareModel software)
+        {
+            softwareRepo.update(software);
+            return StatusCode(200);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] SoftwareModel software)
         {
             softwareRepo.destroy(software.id);

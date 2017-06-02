@@ -9,5 +9,7 @@ namespace Killerapp.Repositories.Software
     {
         List<SoftwareModel> index(int id);
         void destroy(int id);
+        void update(SoftwareModel software);
+        SoftwareModel find(int id);
     }
 }

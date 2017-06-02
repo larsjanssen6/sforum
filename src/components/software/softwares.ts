@@ -2,13 +2,14 @@
 import { autoinject } from "aurelia-framework"
 import { AuthService } from 'aurelia-authentication';
 import * as jwt_decode from 'jwt-decode';
+import { Router } from 'aurelia-router'
 
 @autoinject
 export class softwares {
 
     public softwares: SoftwareModel[] = [];
 
-    constructor(private http: HttpClient, private authService: AuthService) {
+    constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
         this.fetchSoftwares();
     }
 
@@ -52,6 +53,12 @@ export class softwares {
                 });
             }        
         });
+
+    }
+
+    editUrl(event, software) {
+        event.stopPropagation();
+        this.router.navigate("software/bewerk/" + software.id);
     }
 }
 

@@ -53,6 +53,36 @@ namespace Killerapp.Repositories.Software
               return softwares;
         }
 
+        public SoftwareModel find(int id)
+        {
+            SoftwareModel software = new SoftwareModel();
+
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("select id, name, corporation_id from software where id = @softwareId", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@softwareId", id);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                  while (reader.Read())
+                  {
+                      software.id = Convert.ToInt32(reader["id"]);
+                      software.name = reader["name"].ToString();
+                      software.corporation_id = Convert.ToInt32(reader["corporation_id"]);
+                  }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return software;
+        }
+
         public void destroy(int id)
         {
             try
@@ -63,6 +93,28 @@ namespace Killerapp.Repositories.Software
                 sqlCommand.ExecuteNonQuery();
                 connection.disConnect();
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
+        public void update(SoftwareModel software)
+        {
+            try
+            {
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("update software set name = @name, corporation_id = @corporation_id where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", software.id);
+                sqlCommand.Parameters.AddWithValue("@name", software.name);
+                sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
+                sqlCommand.ExecuteNonQuery();
             }
             catch (Exception)
             {

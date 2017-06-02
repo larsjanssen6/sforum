@@ -100,6 +100,18 @@ export class App {
                 auth: true
             },
             {
+                route: ['software/niuew'],
+                name: 'newSoftware',
+                moduleId: 'components/software/newSoftware',
+                auth: true
+            },
+            {
+                route: ['software/bewerk/:id'],
+                name: 'editSoftware',
+                moduleId: 'components/software/editSoftware',
+                auth: true
+            },
+            {
                 route: ['software'],
                 name: 'softwares',
                 moduleId: 'components/software/softwares',
