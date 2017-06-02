@@ -35,12 +35,13 @@ namespace Killerapp.Controllers.User
             return Json(userRepo.find(id));
         }
 
-        //[HttpPost]
-        //[Authorize(Roles = "user")]
-        //public JsonResult update([FromBody] UserModel user)
-        //{
-        //   //return Json(userRepo.update(user));
-        //}
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult update([FromBody] UserModel user)
+        {
+            userRepo.update(user);
+            return StatusCode(200);
+        }
 
         [HttpPost]
         [Authorize(Roles = "user")]

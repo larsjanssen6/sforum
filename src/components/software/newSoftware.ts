@@ -6,7 +6,7 @@ import { Router } from 'aurelia-router'
 export class editSoftware {
 
     corporations = [];
-    software: {};
+    public software = new Software();
 
     constructor(private http: HttpClient, private router: Router) {
         this.fetchCorporations();
@@ -38,3 +38,8 @@ export class editSoftware {
     }
 }
 
+export class Software {
+    id: number;
+    name: string;
+    corporation_id: number;
+}

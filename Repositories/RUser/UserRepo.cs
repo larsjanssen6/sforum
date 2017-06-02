@@ -99,16 +99,24 @@ namespace Proftaak.Repositories.UserRepo
         {
             try
             {
-                //connection.Connect();
-                //SqlCommand sqlCommand = new SqlCommand("update account set subject = @subject, message = @message where id = @id", connection.getConnection());
-                //sqlCommand.Parameters.AddWithValue("@subject", message.subject);
-                //sqlCommand.Parameters.AddWithValue("@message", message.message);
-                //sqlCommand.Parameters.AddWithValue("@id", message.id);
-                //sqlCommand.ExecuteNonQuery();
+                connection.Connect();
+                SqlCommand sqlCommand = new SqlCommand("update account set name = @name, last_name = @lastName, corporation_id = @corporation_id, role = @role, gender = @gender, salary = @salary, email = @email, about = @about, password = @password where id = @id", connection.getConnection());
+                sqlCommand.Parameters.AddWithValue("@id", user.id);
+                sqlCommand.Parameters.AddWithValue("@name", user.name);
+                sqlCommand.Parameters.AddWithValue("@lastName", user.lastName);
+                sqlCommand.Parameters.AddWithValue("@corporation_id", user.corporation_id);
+                sqlCommand.Parameters.AddWithValue("@role", user.role);
+                sqlCommand.Parameters.AddWithValue("@gender", user.gender);
+                sqlCommand.Parameters.AddWithValue("@salary", user.salary);
+                sqlCommand.Parameters.AddWithValue("@email", user.email);
+                sqlCommand.Parameters.AddWithValue("@about", user.about);
+                sqlCommand.Parameters.AddWithValue("@password", user.password);
+                sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception)
+
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             finally

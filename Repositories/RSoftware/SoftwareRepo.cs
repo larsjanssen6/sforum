@@ -83,6 +83,31 @@ namespace Killerapp.Repositories.Software
             return software;
         }
 
+        public void store(SoftwareModel software)
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("insert into software (name, corporation_id) VALUES (@name, @corporation_id)", connection.getConnection());
+                connection.Connect();
+
+                sqlCommand.Parameters.AddWithValue("@name", software.name);
+                sqlCommand.Parameters.AddWithValue("@corporation_id", software.corporation_id);
+                sqlCommand.Connection = connection.getConnection();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                connection.disConnect();
+            }
+        }
+
         public void destroy(int id)
         {
             try

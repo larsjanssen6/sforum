@@ -8,7 +8,7 @@ import { AuthService } from 'aurelia-authentication';
 export class editUser {
 
     public corporations: Corporation[] = [];
-    public user: {};
+    public user = new User();
 
     constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
@@ -42,14 +42,12 @@ export class editUser {
         this.http.fetch('user/update', {
             body: json(this.user)
         }).then(response => {
-            if (response.status == 200) {
-                swal({
-                    title: "Gebruiker succesvol geupdatet",
-                    type: "success",
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-            }
+              swal({
+                  title: "Gebruiker succesvol geupdatet",
+                  type: "success",
+                  showConfirmButton: false,
+                  timer: 2000
+              });
         });
     }
 }
@@ -61,3 +59,18 @@ export class Corporation {
     address: string;
     zip: string;
 }
+
+export class User {
+    id: number;
+    corporation_id: number;
+    role: number;
+    password: string;
+    salary: string;
+    email: string;
+    name: string;
+    lastName: string;
+    about: string;
+    gender: number;
+    DateTime: Date;
+}
+

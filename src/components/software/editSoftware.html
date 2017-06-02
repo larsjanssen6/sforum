@@ -28,7 +28,7 @@
                   <select class="form-control" value.bind="software.corporation_id" required>
                     <option disabled value="">Selecteer corporation</option>
 
-                    <option repeat.for="corporation of corporations" model.bind="software.corporation_id">${corporation.name}</option>
+                    <option repeat.for="corporation of corporations" model.bind="corporation.id">${corporation.name}</option>
                   </select>
                 </div>
               </div>

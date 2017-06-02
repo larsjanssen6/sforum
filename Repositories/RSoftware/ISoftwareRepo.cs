@@ -11,5 +11,6 @@ namespace Killerapp.Repositories.Software
         void destroy(int id);
         void update(SoftwareModel software);
         SoftwareModel find(int id);
+        void store(SoftwareModel software);
     }
 }

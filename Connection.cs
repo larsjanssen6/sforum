@@ -17,9 +17,9 @@ namespace Proftaak
       {
         databaseConnection.Open();
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-        throw;
+        throw ex;
       }
     }
     public void disConnect()

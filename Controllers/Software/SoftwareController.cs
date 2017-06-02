@@ -34,6 +34,15 @@ namespace Killerapp.Controllers.Software
             return Json(softwareRepo.find(id));
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult store([FromBody] SoftwareModel software)
+        {
+            softwareRepo.store(software);
+            return StatusCode(200);
+        }
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] SoftwareModel software)
