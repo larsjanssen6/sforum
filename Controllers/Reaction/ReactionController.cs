@@ -14,12 +14,14 @@ namespace Killerapp.Controllers.Message
     public class ReactionController : Controller
     {
         IReactionRepo reactionRepo;
+        LogErrors errors;
 
         //Init constructor
 
         public ReactionController()
         {
             reactionRepo = new ReactionRepo(new Connection());
+            errors = new LogErrors();
         }
 
         //Store a reaction
@@ -28,9 +30,18 @@ namespace Killerapp.Controllers.Message
         [Authorize(Roles = "user")]
         public IActionResult store([FromBody] ReactionModel reaction)
         {
-            int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
-            int id = reactionRepo.store(reaction, authId);
-            return Json(reactionRepo.find(id));
+            try
+            {
+                int authId = Convert.ToInt32(User.Claims.Single(c => c.Type == "id").Value);
+                int id = reactionRepo.store(reaction, authId);
+                return Json(reactionRepo.find(id));
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }          
         }
 
         //Update a reaction
@@ -39,8 +50,17 @@ namespace Killerapp.Controllers.Message
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] ReactionModel reaction)
         {
-            reactionRepo.update(reaction);
-            return StatusCode(200);
+            try
+            {
+                reactionRepo.update(reaction);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }      
         }
 
         //Destroy a reaction
@@ -49,8 +69,17 @@ namespace Killerapp.Controllers.Message
         [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] ReactionModel reaction)
         {
-            reactionRepo.destroy(reaction.id);
-            return StatusCode(200);
+            try
+            {
+                reactionRepo.destroy(reaction.id);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }          
         }
     }
 }

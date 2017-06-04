@@ -14,11 +14,13 @@ namespace Killerapp.Controllers.Software
     public class SoftwareController : Controller
     {
         ISoftwareRepo softwareRepo;
-
+        LogErrors errors;  
+      
         //Init constructor
         public SoftwareController()
         {
             softwareRepo = new SoftwareRepo(new Connection());
+            errors = new LogErrors();
         }
 
         //Return all software
@@ -27,7 +29,16 @@ namespace Killerapp.Controllers.Software
         [Authorize(Roles = "user")]
         public JsonResult index([FromBody] int corporationId)
         {
-            return Json(softwareRepo.index(corporationId));
+            try
+            {
+                return Json(softwareRepo.index(corporationId));
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }
         }
 
         //Return software
@@ -36,7 +47,16 @@ namespace Killerapp.Controllers.Software
         [Authorize(Roles = "user")]
         public JsonResult show([FromBody] int id)
         {
-            return Json(softwareRepo.find(id));
+            try
+            {
+                return Json(softwareRepo.find(id));
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }
         }
 
         //Store software
@@ -45,8 +65,17 @@ namespace Killerapp.Controllers.Software
         [Authorize(Roles = "user")]
         public IActionResult store([FromBody] SoftwareModel software)
         {
-            softwareRepo.store(software);
-            return StatusCode(200);
+            try
+            {
+                softwareRepo.store(software);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }         
         }
 
         //Update software
@@ -55,8 +84,17 @@ namespace Killerapp.Controllers.Software
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] SoftwareModel software)
         {
-            softwareRepo.update(software);
-            return StatusCode(200);
+            try
+            {
+                softwareRepo.update(software);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }          
         }
 
         //Destroy software
@@ -65,8 +103,17 @@ namespace Killerapp.Controllers.Software
         [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] SoftwareModel software)
         {
-            softwareRepo.destroy(software.id);
-            return StatusCode(200);
+            try
+            {
+                softwareRepo.destroy(software.id);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }          
         }
     }
 }
