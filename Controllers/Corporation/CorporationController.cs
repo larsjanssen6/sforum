@@ -36,7 +36,7 @@ namespace Killerapp.Controllers.Corporation
 
             catch (Exception ex)
             {
-               errors.logError(ex);
+               errors.log(ex);
                return Json(null);      
             }
         }
@@ -54,7 +54,7 @@ namespace Killerapp.Controllers.Corporation
 
             catch(Exception ex)
             {
-                errors.logError(ex);
+                errors.log(ex);
                 return Json(null);
             }
         }
@@ -73,7 +73,7 @@ namespace Killerapp.Controllers.Corporation
 
             catch (Exception ex)
             {
-                errors.logError(ex);
+                errors.log(ex);
                 return Json(null);
             }
         }
@@ -92,7 +92,7 @@ namespace Killerapp.Controllers.Corporation
 
             catch (Exception ex)
             {
-                errors.logError(ex);
+                errors.log(ex);
                 return Json(null);
             }
         }
@@ -111,7 +111,7 @@ namespace Killerapp.Controllers.Corporation
 
             catch (Exception ex)
             {
-                errors.logError(ex);
+                errors.log(ex);
                 return Json(null);
             }
         }

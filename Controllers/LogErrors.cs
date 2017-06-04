@@ -8,7 +8,7 @@ namespace Killerapp.Controllers
 {
     public class LogErrors
     {
-        public void logError(Exception ex)
+        public void log(Exception ex)
         {
             string strPath = @"error.txt";
             if (!System.IO.File.Exists(strPath))

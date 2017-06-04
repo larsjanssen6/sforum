@@ -13,11 +13,13 @@ namespace Killerapp.Controllers.Forum
       public class ForumController : Controller
       {
           IForumRepo forumRepo;
+          LogErrors errors;
 
           //Init constructor
           public ForumController()
           {
-              forumRepo = new ForumRepo(new Connection());              
+              forumRepo = new ForumRepo(new Connection());
+              errors = new LogErrors();
           }
 
           //Return all forums
@@ -26,7 +28,16 @@ namespace Killerapp.Controllers.Forum
           [Authorize(Roles = "user")]
           public JsonResult index()
           {
-              return Json(forumRepo.index());
+              try
+              {
+                  return Json(forumRepo.index());
+              }
+
+              catch (Exception ex)
+              {
+                  errors.log(ex);
+                  return Json(null);
+              }
           }
 
           //Return one forum
@@ -35,7 +46,16 @@ namespace Killerapp.Controllers.Forum
           [Authorize(Roles = "user")]
           public JsonResult show([FromBody] int id)
           {
-              return Json(forumRepo.find(id));
+              try
+              {
+                  return Json(forumRepo.find(id));
+              }
+
+              catch (Exception ex)
+              {
+                  errors.log(ex);
+                  return Json(null);
+              }
           }
 
           //Store a forum
@@ -44,8 +64,17 @@ namespace Killerapp.Controllers.Forum
           [Authorize(Roles = "user")]
           public IActionResult store([FromBody] ForumModel forum)
           {
-              forumRepo.store(forum);
-              return StatusCode(200);
+              try
+              {
+                  forumRepo.store(forum);
+                  return StatusCode(200);
+              }
+
+              catch (Exception ex)
+              {
+                  errors.log(ex);
+                  return Json(null);
+              }           
           }
 
           //Update a forum
@@ -54,8 +83,17 @@ namespace Killerapp.Controllers.Forum
           [Authorize(Roles = "user")]
           public IActionResult update([FromBody] ForumModel forum)
           {
-              forumRepo.update(forum);
-              return StatusCode(200);
+              try
+              {
+                  forumRepo.update(forum);
+                  return StatusCode(200);
+              }
+
+              catch (Exception ex)
+              {
+                  errors.log(ex);
+                  return Json(null);
+              }            
           }
 
           //Destroy a forum
@@ -64,9 +102,18 @@ namespace Killerapp.Controllers.Forum
           [Authorize(Roles = "user")]
           public IActionResult destroy([FromBody] ForumModel forum)
           {
-              ForumModel model = forum;
-              forumRepo.destroy(forum.id);
-              return StatusCode(200);
+              try
+              {
+                  ForumModel model = forum;
+                  forumRepo.destroy(forum.id);
+                  return StatusCode(200);
+              }
+
+              catch (Exception ex)
+              {
+                  errors.log(ex);
+                  return Json(null);
+              }
           }
       }
 }
