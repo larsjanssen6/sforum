@@ -5,17 +5,37 @@ import { Router } from 'aurelia-router'
 @autoinject
 export class messages {
 
-    public context;
+    public lgroupBy;
+    public lgroupByHaving;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    public groupBy: boolean;
+    public groupByHaving: boolean;
+
+    constructor(private http: HttpClient, private router: Router) {
+        this.groupBy = false;
+        this.groupByHaving = false;
+    }
 
     fetchGroupBy() {
+        this.groupBy = true;
+
         this.http.fetch('fun/groupby')
             .then(response => response.json())
             .then(data => {
-                this.context = data;
+                this.lgroupBy = data;
             });
     }
+
+
+    fetchGroupByHaving() {
+        this.groupByHaving = true;
+
+        this.http.fetch('fun/groupbyhaving')
+            .then(response => response.json())
+            .then(data => {
+                this.lgroupByHaving = data;
+            });
+    } 
 }
 
 

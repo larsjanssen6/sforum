@@ -10,7 +10,12 @@
       <side-bar></side-bar>
 
       <div class="col-md-10">
-        <div class="panel panel-default">
+        <button click.delegate="fetchGroupBy()" class="btn btn-primary margin__bottom__small">Group by</button>
+        <button click.delegate="fetchGroupByHaving()" class="btn btn-primary margin__bottom__small">Group by having</button>
+
+        <!--group by-->
+
+        <div class="panel panel-default" if.bind="groupBy">
           <div class="panel-body">
             <table class="table table-hover">
               <thead>
@@ -26,7 +31,7 @@
               </thead>
 
               <tbody>
-                <tr repeat.for="c of context">
+                <tr repeat.for="c of lgroupBy">
                   <td class="col-md-5">
                     ${c.name}
                   </td>
@@ -39,7 +44,39 @@
             </table>
           </div>
         </div>
+
+
+      <!-- Group by having -->
+      <div class="panel panel-default" if.bind="groupByHaving">
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class="col-md-5 table__title">
+                  Naam
+                </th>
+
+                <th class="col-md-5 table__title">
+                  Aantal berichten
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr repeat.for="c of lgroupByHaving">
+                <td class="col-md-5">
+                  ${c.name}
+                </td>
+
+                <td class="col-md-5">
+                  ${c.messages}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </template>

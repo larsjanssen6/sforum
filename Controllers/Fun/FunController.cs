@@ -24,5 +24,14 @@ namespace Killerapp.Controllers.Fun
         {
             return Json(funRepo.groupBy());
         }
+
+        //Return all forums
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public JsonResult groupByHaving()
+        {
+            return Json(funRepo.groupByHaving());
+        }
     }
 }

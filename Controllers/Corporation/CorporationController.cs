@@ -13,12 +13,14 @@ namespace Killerapp.Controllers.Corporation
     public class CorporationController : Controller
     {
         ICorporationRepo corporationRepo;
+        LogErrors errors;
 
         //Init constructor
 
         public CorporationController()
         {
             corporationRepo = new CorporationRepo(new Connection());
+            errors = new LogErrors();
         }
         
         
@@ -27,7 +29,16 @@ namespace Killerapp.Controllers.Corporation
         [HttpPost]
         public JsonResult index()
         {
-            return Json(corporationRepo.index());
+            try
+            {
+                return Json(corporationRepo.index());
+            }
+
+            catch (Exception ex)
+            {
+               errors.logError(ex);
+               return Json(null);      
+            }
         }
 
         //Return one corporation
@@ -36,7 +47,16 @@ namespace Killerapp.Controllers.Corporation
         [Authorize(Roles = "user")]
         public IActionResult show([FromBody] int id)
         {
-          return Json(corporationRepo.find(id));
+            try
+            {
+                return Json(corporationRepo.find(id));
+            }
+
+            catch(Exception ex)
+            {
+                errors.logError(ex);
+                return Json(null);
+            }
         }
 
         //Store a corporation
@@ -45,8 +65,17 @@ namespace Killerapp.Controllers.Corporation
         [Authorize(Roles = "user")]
         public IActionResult store([FromBody] CorporationModel corporation)
         {
-            corporationRepo.store(corporation);
-            return StatusCode(200);
+            try
+            {
+                corporationRepo.store(corporation);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.logError(ex);
+                return Json(null);
+            }
         }
 
         //Update a corporation
@@ -55,17 +84,36 @@ namespace Killerapp.Controllers.Corporation
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] CorporationModel corporation)
         {
-            corporationRepo.update(corporation);
-            return StatusCode(200);
+            try
+            {
+                corporationRepo.update(corporation);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.logError(ex);
+                return Json(null);
+            }
         }
 
         //Destroy a corporation 
+
         [HttpPost]
         [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] CorporationModel corporation)
         {
-            corporationRepo.destroy(corporation.id);
-            return StatusCode(200);
+            try
+            {
+                corporationRepo.destroy(corporation.id);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.logError(ex);
+                return Json(null);
+            }
         }
     }
 }
