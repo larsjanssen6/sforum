@@ -9,7 +9,8 @@ namespace Killerapp.Repositories.RFun.models
   {
     //These values belong to a gecorroleerd model
 
+    public string corporation { get; set; }
     public string name { get; set; }
-    public int messages { get; set; }
+    public int salary { get; set; }
   }
 }

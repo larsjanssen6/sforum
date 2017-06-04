@@ -80,7 +80,7 @@ namespace Killerapp.Repositories.RFun
             List<SoftwareModel> softwares = new List<SoftwareModel>();
 
             connection.Connect();
-            SqlCommand sqlCommand = new SqlCommand("select software.name from software full outer join corporation software.corporation_id = corporation.id full outer join account on corporation.id = account.corporation_id where account.name = 'Lars'", connection.getConnection());
+            SqlCommand sqlCommand = new SqlCommand("select software.name from software full outer join corporation on software.corporation_id = corporation.id full outer join account on corporation.id = account.corporation_id where account.name = 'Lars'", connection.getConnection());
             SqlDataReader reader = sqlCommand.ExecuteReader();
 
             if (reader.HasRows)
@@ -119,6 +119,31 @@ namespace Killerapp.Repositories.RFun
 
             connection.disConnect();
             return recursiveModels;
+        }
+
+        public List<GecorreleerdModel> gecorreleerde()
+        {
+            GecorreleerdModel gecorreleerdModel;
+            List<GecorreleerdModel> gecorreleerde = new List<GecorreleerdModel>();
+
+            connection.Connect();
+            SqlCommand sqlCommand = new SqlCommand("select c.name as 'corporation', a.name as 'name', a.salary as 'salary' from corporation c inner join account a on c.id = a.corporation_id where a.salary = (select max(ac2.salary) from account ac2 where ac2.corporation_id = a.corporation_id)", connection.getConnection());
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    gecorreleerdModel = new GecorreleerdModel();
+                    gecorreleerdModel.name = reader["corporation"].ToString();
+                    gecorreleerdModel.corporation = reader["name"].ToString();
+                    gecorreleerdModel.salary = Convert.ToInt32(reader["salary"]);
+                    gecorreleerde.Add(gecorreleerdModel);
+                }
+            }
+
+            connection.disConnect();
+            return gecorreleerde;
         }
     }
 }

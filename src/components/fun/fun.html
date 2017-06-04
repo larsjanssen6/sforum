@@ -12,10 +12,16 @@
       <div class="col-md-10">
         <button click.delegate="fetchGroupBy()" class="btn btn-primary margin__bottom__small">Group by</button>
         <button click.delegate="fetchGroupByHaving()" class="btn btn-primary margin__bottom__small">Group by having</button>
+        <button click.delegate="fetchOuterJoin()" class="btn btn-primary margin__bottom__small">Outer join</button>        
+        <button click.delegate="fetchRecursive()" class="btn btn-primary margin__bottom__small">Recursief</button>
+        <button click.delegate="fetchGecorreleerde()" class="btn btn-primary margin__bottom__small">Gecorreleerd</button>
 
         <!--group by-->
 
         <div class="panel panel-default" if.bind="groupBy">
+          <div class="bar">
+            <h1>Group by</h1>
+          </div>
           <div class="panel-body">
             <table class="table table-hover">
               <thead>
@@ -48,6 +54,9 @@
 
       <!-- Group by having -->
       <div class="panel panel-default" if.bind="groupByHaving">
+        <div class="bar">
+          <h3>Group by having</h3>
+        </div>
         <div class="panel-body">
           <table class="table table-hover">
             <thead>
@@ -76,6 +85,108 @@
           </table>
         </div>
       </div>
+
+
+        <!-- Outer join -->
+
+        <div class="panel panel-default" if.bind="outerJoin">
+          <div class="bar">
+            <h3>Outer join</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-5 table__title">
+                    Naam
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="c of louterJoin">
+                  <td class="col-md-5">
+                    ${c.name}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recursive -->
+
+        <div class="panel panel-default" if.bind="recursive">
+          <div class="bar">
+            <h3>Recursief</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-5 table__title">
+                    Naam
+                  </th>
+
+                  <th class="col-md-5 table__title">
+                    Naam
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="c of lrecursive">
+                  <td class="col-md-5">
+                    ${c.name}
+                  </td>
+
+                  <td class="col-md-5">
+                    ${c.recurname}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Gecorreleerde -->
+
+        <div class="panel panel-default" if.bind="gecorreleerd">
+          <div class="bar">
+            <h3>Gecorreleerd</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="col-md-5 table__title">
+                    Corporatie
+                  </th>
+                  <th class="col-md-5 table__title">
+                    Naam
+                  </th>
+                  <th class="col-md-5 table__title">
+                    Salaris
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr repeat.for="c of lgecorreleerd">
+                  <td class="col-md-5">
+                    ${c.corporation}
+                  </td>
+                  <td class="col-md-5">
+                    ${c.name}
+                  </td>
+                  <td class="col-md-5">
+                    ${c.salary}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
   </div>
 </div>

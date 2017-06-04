@@ -13,5 +13,6 @@ namespace Killerapp.Repositories.RFun
         List<GroupByModel> groupByHaving();
         List<SoftwareModel> outerJoin();
         List<RecursiveModel> recursive();
+        List<GecorreleerdModel> gecorreleerde();
     }
 }
