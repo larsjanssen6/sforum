@@ -37,6 +37,12 @@ export class App {
         config.title = 'Aurelia';
         config.map([
             {
+                route: ['fun'],
+                name: 'fun',
+                moduleId: 'components/fun/fun',
+                auth: true
+            },
+            {
                 route: ['bericht/:id'],
                 name: 'message',
                 moduleId: 'components/message/message',

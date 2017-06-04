@@ -47,6 +47,12 @@
             </li>
 
             <li>
+              <a route-href="route: fun" class="${currUrl == 'softwares' ? 'active' : ''}" show.bind="authenticated">
+                Fun
+              </a>
+            </li>
+
+            <li>
               <a href="#" click.delegate="logout()" show.bind="authenticated">
                 Uitloggen
               </a>
