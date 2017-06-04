@@ -15,12 +15,14 @@ namespace Killerapp.Controllers.User
     public class UserController : Controller
     {
         IUserRepo userRepo;
+        LogErrors errors;    
 
         //Init constructor
 
         public UserController()
         {
             userRepo = new UserRepo(new Connection());
+            errors = new LogErrors();
         }
         
         //Return all users
@@ -29,7 +31,16 @@ namespace Killerapp.Controllers.User
         [Authorize(Roles = "user")]
         public JsonResult index()
         {
-            return Json(userRepo.index());
+            try
+            {
+                return Json(userRepo.index());
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }
         }
 
         //Return one user
@@ -38,7 +49,16 @@ namespace Killerapp.Controllers.User
         [Authorize(Roles = "user")]
         public JsonResult show([FromBody] int id)
         {
-            return Json(userRepo.find(id));
+            try
+            {
+                return Json(userRepo.find(id));
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }
         }
 
         //Store a user
@@ -46,8 +66,17 @@ namespace Killerapp.Controllers.User
         [HttpPost]
         public IActionResult store([FromBody] UserModel user)
         {
-           userRepo.store(user);
-           return StatusCode(200);
+            try
+            {
+                userRepo.store(user);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }         
         }
 
         //Update a user
@@ -56,8 +85,17 @@ namespace Killerapp.Controllers.User
         [Authorize(Roles = "user")]
         public IActionResult update([FromBody] UserModel user)
         {
-            userRepo.update(user);
-            return StatusCode(200);
+            try
+            {
+                userRepo.update(user);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }            
         }
 
         //Destroy a reaction
@@ -66,8 +104,17 @@ namespace Killerapp.Controllers.User
         [Authorize(Roles = "user")]
         public IActionResult destroy([FromBody] UserModel user)
         {
-            userRepo.destroy(user.id);
-            return StatusCode(200);
+            try
+            {
+                userRepo.destroy(user.id);
+                return StatusCode(200);
+            }
+
+            catch (Exception ex)
+            {
+                errors.log(ex);
+                return Json(null);
+            }        
         }
     }
 }
