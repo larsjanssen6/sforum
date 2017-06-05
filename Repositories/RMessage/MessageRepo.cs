@@ -86,9 +86,9 @@ namespace Killerapp.Repositories.RMessage
 
         //Store a message
 
-        public void store(MessageModel message, int authId)
+        public int store(MessageModel message, int authId)
         {
-            SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message)", connection.getConnection());
+            SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message) select scope_identity()", connection.getConnection());
             connection.Connect();
 
             sqlCommand.Parameters.AddWithValue("@forum_id", message.forum);
@@ -98,8 +98,10 @@ namespace Killerapp.Repositories.RMessage
             sqlCommand.Parameters.AddWithValue("@message", message.message);
             sqlCommand.Connection = connection.getConnection();
 
-            sqlCommand.ExecuteNonQuery();           
-            connection.disConnect();            
+            int id = (int)(decimal)sqlCommand.ExecuteScalar();
+            connection.disConnect();
+
+            return id;
         }
         
         //Update a message
