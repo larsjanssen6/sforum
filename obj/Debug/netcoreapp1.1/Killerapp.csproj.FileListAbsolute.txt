@@ -10,9 +10,12 @@
 Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.deps.json
 Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.runtimeconfig.json
 Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.runtimeconfig.dev.json
-Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.dll
-Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.pdb
 Y:\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Killerapp.csprojResolveAssemblyReference.cache
 Y:\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Killerapp.AssemblyInfo.cs
+Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.dll
+Y:\Code\Net\killerapp\Proftaak\bin\Debug\netcoreapp1.1\Killerapp.pdb
 Y:\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Killerapp.dll
 Y:\Code\Net\killerapp\Proftaak\obj\Debug\netcoreapp1.1\Killerapp.pdb
