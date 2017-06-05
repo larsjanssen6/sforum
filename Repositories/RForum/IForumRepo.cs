@@ -12,7 +12,7 @@ namespace Killerapp.Repositories.RForum
 
         List<ForumModel> index();
         ForumModel find(int id);
-        void store(ForumModel forum);
+        int store(ForumModel forum);
         void update(ForumModel forum);
         void destroy(int id);
     }

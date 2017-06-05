@@ -76,10 +76,10 @@ namespace Killerapp.Repositories.RCorporation
         
         //Store a corporation
 
-        public void store(CorporationModel corporation)
+        public int store(CorporationModel corporation)
         {
 
-            SqlCommand sqlCommand = new SqlCommand("insert into corporation (email, name, address, zip) VALUES (@email, @name, @address, @zip)", connection.getConnection());
+            SqlCommand sqlCommand = new SqlCommand("insert into corporation (email, name, address, zip) VALUES (@email, @name, @address, @zip) select scope_identity()", connection.getConnection());
             connection.Connect();
 
             sqlCommand.Parameters.AddWithValue("@email", corporation.email);
@@ -88,8 +88,10 @@ namespace Killerapp.Repositories.RCorporation
             sqlCommand.Parameters.AddWithValue("@zip", corporation.zip);
             sqlCommand.Connection = connection.getConnection();
 
-            sqlCommand.ExecuteNonQuery();       
-            connection.disConnect();          
+            int id = (int)(decimal)sqlCommand.ExecuteScalar();
+            connection.disConnect();
+
+            return id;
         }
 
         //Update a corporation

@@ -72,17 +72,18 @@ namespace Killerapp.Repositories.RForum
         
         //Store a forum
 
-        public void store(ForumModel forum)
+        public int store(ForumModel forum)
         {
 
-            SqlCommand sqlCommand = new SqlCommand("insert into forum (name, description) VALUES (@name, @description)", connection.getConnection());
+            SqlCommand sqlCommand = new SqlCommand("insert into forum (name, description) VALUES (@name, @description) select scope_identity()", connection.getConnection());
             connection.Connect();
             sqlCommand.Parameters.AddWithValue("@name", forum.name);
             sqlCommand.Parameters.AddWithValue("@description", forum.description);
             sqlCommand.Connection = connection.getConnection();
+            int id =  (int)(decimal)sqlCommand.ExecuteScalar();
+            connection.disConnect();
 
-            sqlCommand.ExecuteNonQuery();                      
-            connection.disConnect();          
+            return id;
         }
         
         //Update a forum
