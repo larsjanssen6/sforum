@@ -60,5 +60,15 @@ namespace Killerapp.Controllers.Fun
         {
           return Json(funRepo.gecorreleerde());
         }
+
+        //Return all corporations that have a recursive relationship
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public IActionResult checkSwearWords()
+        {
+            funRepo.challengeTrigger();
+            return StatusCode(200);
+        }
     }
 }

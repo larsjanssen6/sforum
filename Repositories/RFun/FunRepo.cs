@@ -3,6 +3,7 @@ using Killerapp.Repositories.Software;
 using Proftaak;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -144,6 +145,17 @@ namespace Killerapp.Repositories.RFun
 
             connection.disConnect();
             return gecorreleerde;
+        }
+        
+        public void challengeTrigger()
+        {
+            SqlCommand sqlCommand;
+            connection.Connect();
+
+            sqlCommand = new SqlCommand("checkSwearWords", connection.getConnection());
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.ExecuteNonQuery();
+            connection.disConnect();
         }
     }
 }

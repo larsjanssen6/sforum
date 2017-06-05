@@ -1,6 +1,7 @@
 ﻿using Proftaak;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,13 +74,14 @@ namespace Killerapp.Repositories.RCorporation
             connection.disConnect();
             return corporation;
         }
-        
-        //Store a corporation
+
+        //Store a corporation and trigger stored procedure so software is automatically stored
 
         public int store(CorporationModel corporation)
         {
+            SqlCommand sqlCommand;
 
-            SqlCommand sqlCommand = new SqlCommand("insert into corporation (email, name, address, zip) VALUES (@email, @name, @address, @zip) select scope_identity()", connection.getConnection());
+            sqlCommand = new SqlCommand("insert into corporation (email, name, address, zip) VALUES (@email, @name, @address, @zip) select scope_identity()", connection.getConnection());
             connection.Connect();
 
             sqlCommand.Parameters.AddWithValue("@email", corporation.email);
@@ -89,6 +91,11 @@ namespace Killerapp.Repositories.RCorporation
             sqlCommand.Connection = connection.getConnection();
 
             int id = (int)(decimal)sqlCommand.ExecuteScalar();
+
+            sqlCommand = new SqlCommand("createSoftware", connection.getConnection());
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@corporation_id", id);
+            sqlCommand.ExecuteNonQuery();
             connection.disConnect();
 
             return id;

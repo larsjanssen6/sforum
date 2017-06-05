@@ -2,6 +2,7 @@
 using Proftaak;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,20 +85,20 @@ namespace Killerapp.Repositories.RMessage
         }
         
 
-        //Store a message
+        //Store a message and check for swear words with a stored procedure
 
         public int store(MessageModel message, int authId)
         {
-            SqlCommand sqlCommand = new SqlCommand("insert into message (forum_id, account_id, software_id, subject, message) VALUES (@forum_id, @account_id, @software_id, @subject, @message) select scope_identity()", connection.getConnection());
+            SqlCommand sqlCommand;
             connection.Connect();
 
+            sqlCommand = new SqlCommand("preventSwearWords", connection.getConnection());
+            sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.Parameters.AddWithValue("@forum_id", message.forum);
             sqlCommand.Parameters.AddWithValue("@account_id", authId);
             sqlCommand.Parameters.AddWithValue("@software_id", message.software);
             sqlCommand.Parameters.AddWithValue("@subject", message.subject);
             sqlCommand.Parameters.AddWithValue("@message", message.message);
-            sqlCommand.Connection = connection.getConnection();
-
             int id = (int)(decimal)sqlCommand.ExecuteScalar();
             connection.disConnect();
 

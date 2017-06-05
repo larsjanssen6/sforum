@@ -23,32 +23,38 @@
           <!-- Right Side Of Navbar -->
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a route-href="route: dashboard" class="${currUrl == 'dashboard' ? 'active' : ''}" show.bind="authenticated">
+              <a route-href="route: dashboard" show.bind="authenticated">
                 Dashboard
               </a>
             </li>
 
             <li>
-              <a route-href="route: corporations" class="${currUrl == 'corporations' ? 'active' : ''}" show.bind="authenticated">
+              <a route-href="route: corporations" show.bind="authenticated">
                 Corporaties
               </a>
             </li>
 
             <li>
-              <a route-href="route: users" class="${currUrl == 'users' ? 'active' : ''}" show.bind="authenticated">
+              <a route-href="route: users" show.bind="authenticated">
                 Gebruikers
               </a>
             </li>
 
             <li>
-              <a route-href="route: softwares" class="${currUrl == 'softwares' ? 'active' : ''}" show.bind="authenticated">
+              <a route-href="route: softwares" show.bind="authenticated">
                 Software
               </a>
             </li>
 
             <li>
-              <a route-href="route: fun" class="${currUrl == 'softwares' ? 'active' : ''}" show.bind="authenticated">
-                Fun
+              <a route-href="route: queries" show.bind="authenticated">
+                Fun queries
+              </a>
+            </li>
+
+            <li>
+              <a click.delegate="cursor()" show.bind="authenticated">
+                Controlleer op scheldwoorden (cursor)
               </a>
             </li>
 
@@ -59,7 +65,7 @@
             </li>
 
             <li>
-              <a route-href="route: register" class="${currUrl == 'register' ? 'active' : ''}" show.bind="!authenticated">
+              <a route-href="route: register" show.bind="!authenticated">
                 Registreer
               </a>
             </li>

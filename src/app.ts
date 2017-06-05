@@ -37,9 +37,9 @@ export class App {
         config.title = 'Aurelia';
         config.map([
             {
-                route: ['fun'],
-                name: 'fun',
-                moduleId: 'components/fun/fun',
+                route: ['queries'],
+                name: 'queries',
+                moduleId: 'components/fun/queries',
                 auth: true
             },
             {
@@ -191,6 +191,20 @@ export class App {
                     timer: 2000
                 });
             });
+    }
+
+    cursor() {
+        this.http.fetch('fun/checkSwearWords')
+            .then(response => {
+            if (response.status == 200) {
+                swal({
+                    title: "Scheldwoorden succesvol verwijderd!",
+                    type: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
     }
 }
 

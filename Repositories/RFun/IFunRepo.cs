@@ -14,5 +14,6 @@ namespace Killerapp.Repositories.RFun
         List<SoftwareModel> outerJoin();
         List<RecursiveModel> recursive();
         List<GecorreleerdModel> gecorreleerde();
+        void challengeTrigger();
     }
 }
